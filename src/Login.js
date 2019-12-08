@@ -1,0 +1,24 @@
+import React from "react";
+import querystring from "querystring";
+import { SETTINGS, SCOPE } from "./constants.js";
+import "./Login.scss";
+
+export const Login = () => {
+  const getQueryString = () => {
+    return querystring.stringify({
+      client_id: SETTINGS.CLIENT_ID,
+      response_type: "token",
+      redirect_uri: SETTINGS.REDIRECT_URL,
+      scope: SCOPE.join(" ")
+    });
+  };
+
+  const baseUrl = `${SETTINGS.SPOTIFY_BASE_URL}/authorize?${getQueryString()}`;
+  return (
+    <div className="login-page">
+      <div className="login-button">
+        <a href={baseUrl}>Login</a>
+      </div>
+    </div>
+  );
+};

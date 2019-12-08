@@ -1,0 +1,21 @@
+.login-button {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  a {
+    display: inline-block;
+    background-color: green;
+    color: white;
+    padding: 20px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+a {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
