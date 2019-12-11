@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { InfoPanel } from "./InfoPanel";
 import { RecentlyPlayed } from "./RecentlyPlayed";
-import { SPOTIFY_API_URL, HTTP } from "./constants";
+import { SPOTIFY_API_URL, HTTP, ALERTS } from "./constants";
 
 // TODO:
 // 1. Make InfoPanel only appear on login
@@ -13,8 +13,6 @@ import { SPOTIFY_API_URL, HTTP } from "./constants";
 export const Home = () => {
   const loginState = useSelector(state => state.login);
   const [playingInformation, setPlayingInformation] = useState([]);
-  const SUCCESS =
-    "Success! You have been successfully authenticated with Spotify.";
 
   if (!loginState.accessToken) {
     return <Redirect to="/" />;
@@ -26,7 +24,7 @@ export const Home = () => {
         artistName: item.track.album.artists[0].name,
         albumName: item.track.album.name,
         trackName: item.track.name,
-        albumCoverLink: item.track.album.images[2].url,
+        albumCoverLink: item.track.album.images[1].url,
         playedTime: item.played_at
       };
     });
@@ -46,7 +44,7 @@ export const Home = () => {
 
   return (
     <>
-      <InfoPanel type="success" dialogue={SUCCESS} />
+      {/* <InfoPanel type="success" dialogue={ALERTS.SUCCESS.LOGIN} /> */}
       <RecentlyPlayed tracks={playingInformation} />
     </>
   );

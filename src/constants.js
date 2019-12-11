@@ -10,6 +10,12 @@ const SETTINGS = {
   REDIRECT_URL: "http://localhost:8080/callback"
 };
 
+const ALERTS = {
+  SUCCESS: {
+    LOGIN: "Success! You have been successfully authenticated with Spotify."
+  }
+};
+
 const SPOTIFY_API_URL = "https://api.spotify.com/v1/me/player/recently-played";
 
 const SCOPE = [
@@ -22,4 +28,4 @@ const SCOPE = [
   "user-read-recently-played"
 ];
 
-export { HTTP, SETTINGS, SCOPE, SPOTIFY_API_URL };
+export { HTTP, SETTINGS, SCOPE, SPOTIFY_API_URL, ALERTS };
