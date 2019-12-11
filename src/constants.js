@@ -10,13 +10,16 @@ const SETTINGS = {
   REDIRECT_URL: "http://localhost:8080/callback"
 };
 
+const SPOTIFY_API_URL = "https://api.spotify.com/v1/me/player/recently-played";
+
 const SCOPE = [
   "user-read-currently-playing",
   "user-read-playback-state",
   "user-library-read",
   "playlist-read-private",
   "user-read-private",
-  "user-read-email"
+  "user-read-email",
+  "user-read-recently-played"
 ];
 
-export { HTTP, SETTINGS, SCOPE };
+export { HTTP, SETTINGS, SCOPE, SPOTIFY_API_URL };
