@@ -1,6 +1,7 @@
 const HTTP = {
   GET: "GET",
-  POST: "POST"
+  POST: "POST",
+  PUT: "PUT"
 };
 
 const SETTINGS = {
@@ -25,7 +26,8 @@ const SCOPE = [
   "playlist-read-private",
   "user-read-private",
   "user-read-email",
-  "user-read-recently-played"
+  "user-read-recently-played",
+  "user-modify-playback-state"
 ];
 
 export { HTTP, SETTINGS, SCOPE, SPOTIFY_API_URL, ALERTS };
