@@ -1,7 +1,13 @@
-.login-button {
-  width: auto;
+.login-page {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+
+  h1 {
+    letter-spacing: 4px;
+  }
+
   a {
     display: inline-block;
     background-color: green;
@@ -12,10 +18,4 @@
       text-decoration: underline;
     }
   }
-}
-
-a {
-  padding: 0;
-  margin: 0;
-  text-decoration: none;
 }

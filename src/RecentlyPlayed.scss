@@ -1,9 +1,5 @@
 .recently-played {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   &__track-row {
     padding: 30px 50px;
@@ -17,11 +13,12 @@
 
     .track-information {
       margin: 0 0 0 20px;
-      width: 300px;
+      width: 250px;
     }
+
     img {
-      width: 150px;
-      height: 150px;
+      width: 125px;
+      height: 125px;
     }
   }
 }
