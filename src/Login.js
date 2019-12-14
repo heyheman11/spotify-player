@@ -16,9 +16,8 @@ export const Login = () => {
   const baseUrl = `${SETTINGS.SPOTIFY_BASE_URL}/authorize?${getQueryString()}`;
   return (
     <div className="login-page">
-      <div className="login-button">
-        <a href={baseUrl}>Login</a>
-      </div>
+      <h1>Spotify Player</h1>
+      <a href={baseUrl}>Login</a>
     </div>
   );
 };

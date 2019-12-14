@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap");
+
+.page-container {
+  margin: auto 60px;
+}
+
 p {
   margin: 0;
 }
@@ -10,6 +16,20 @@ button {
   cursor: pointer;
 }
 
-.page-container {
-  margin: auto 60px;
+a {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+.primary {
+  // font-weight: 400;
+  color: grey;
+  margin: 0 0 6px 0;
+}
+.secondary {
 }

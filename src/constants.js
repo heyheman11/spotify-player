@@ -16,7 +16,7 @@ const ALERTS = {
   }
 };
 
-const SPOTIFY_API_URL = "https://api.spotify.com/v1/me/player/recently-played";
+const SPOTIFY_API_URL = "https://api.spotify.com";
 
 const SCOPE = [
   "user-read-currently-playing",

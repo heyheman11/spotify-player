@@ -1,51 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { InfoPanel } from "./InfoPanel";
-import { RecentlyPlayed } from "./RecentlyPlayed";
-import { SPOTIFY_API_URL, HTTP, ALERTS } from "./constants";
+import { baseUrl } from "./common";
+import RecentlyPlayedContainer from "./RecentlyPlayedContainer";
+import { FloatingPlayer } from "./FloatingPlayer";
+import { HTTP, SPOTIFY_API_URL } from "./constants";
+import "./Home.scss";
 
-// TODO:
-// 1. Make InfoPanel only appear on login
-// Ability to remove InfoPanel
-// 2. Correct protect routes
+export const Home = ({ location }) => {
+  const [accessToken, setAccessToken] = useState(location.state.accessToken);
+  const [userDetails, setUserDetail] = useState({});
 
-export const Home = () => {
-  const loginState = useSelector(state => state.login);
-  const [playingInformation, setPlayingInformation] = useState([]);
-
-  if (!loginState.accessToken) {
-    return <Redirect to="/" />;
+  if (!accessToken) {
+    window.location = baseUrl;
   }
 
-  const getTracks = trackList => {
-    const tracks = trackList.map(item => {
-      return {
-        artistName: item.track.album.artists[0].name,
-        albumName: item.track.album.name,
-        trackName: item.track.name,
-        albumCoverLink: item.track.album.images[1].url,
-        playedTime: item.played_at
-      };
+  const saveDetails = data => {
+    setUserDetail({
+      displayName: data.display_name,
+      email: data.email
     });
-    setPlayingInformation(tracks);
   };
 
   useEffect(() => {
-    fetch(SPOTIFY_API_URL, {
+    fetch(`${SPOTIFY_API_URL}/v1/me`, {
       method: HTTP.GET,
       headers: {
-        Authorization: `Bearer ${loginState.accessToken}`
+        Authorization: `Bearer ${accessToken}`
       }
-    })
-      .then(res => res.json())
-      .then(data => getTracks(data.items));
+    }).then(response => {
+      if (response.status === 401) {
+        // Handle a 401
+        // Expired token
+        response.json().then();
+      }
+      response.json().then(saveDetails);
+    });
   }, []);
 
   return (
-    <>
-      {/* <InfoPanel type="success" dialogue={ALERTS.SUCCESS.LOGIN} /> */}
-      <RecentlyPlayed tracks={playingInformation} />
-    </>
+    <div className="home">
+      <div className="profile">
+        <p>{`logged in as: ${userDetails.displayName}`}</p>
+        <p>{`email: ${userDetails.email}`}</p>
+      </div>
+      <RecentlyPlayedContainer accessToken={accessToken} />
+      <FloatingPlayer accessToken={accessToken} />
+    </div>
   );
 };
