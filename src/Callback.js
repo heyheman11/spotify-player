@@ -1,6 +1,5 @@
 import React from "react";
 import { InfoPanel } from "./InfoPanel";
-import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 export const Callback = () => {
@@ -16,7 +15,6 @@ export const Callback = () => {
   const renderElements = () => {
     if (location.hash) {
       const accessToken = getToken(location.hash);
-      dispatch({ type: "ADD_TOKEN", payload: accessToken });
       return <Redirect to="/home" />;
     }
     return <InfoPanel type="error" dialogue={location.search} />;

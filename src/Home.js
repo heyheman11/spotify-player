@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { InfoPanel } from "./InfoPanel";
 import { RecentlyPlayed } from "./RecentlyPlayed";
@@ -11,7 +11,7 @@ import { SPOTIFY_API_URL, HTTP, ALERTS } from "./constants";
 // 2. Correct protect routes
 
 export const Home = () => {
-  const loginState = useSelector(state => state.login);
+  // const loginState = useSelector(state => state.login);
   const [playingInformation, setPlayingInformation] = useState([]);
 
   if (!loginState.accessToken) {
