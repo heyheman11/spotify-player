@@ -14,7 +14,9 @@ const RecentlyPlayedContainer = ({ accessToken }) => {
     const tracks = items.map(item => {
       return {
         artistName: item.track.album.artists[0].name,
+        artistLink: item.track.album.artists[0].href,
         albumName: item.track.album.name,
+        albumLink: item.track.album.href,
         trackName: item.track.name,
         albumCoverLink: item.track.album.images[1].url,
         playedTime: item.played_at

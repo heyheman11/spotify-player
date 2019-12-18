@@ -4,7 +4,12 @@
   bottom: 10px;
   width: 80px;
   height: 80px;
-  background-color: #009b1c;
+  background: rgb(0, 194, 1);
+  background: linear-gradient(
+    208deg,
+    rgba(0, 194, 1, 1) 0%,
+    rgba(33, 121, 9, 1) 49%
+  );
   box-shadow: 10px 15px 35px -5px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
   opacity: 0.7;
@@ -13,26 +18,26 @@
   justify-content: center;
   align-items: center;
 
-  &-inner {
-    width: 225px;
-    height: 475px;
-    background-color: white;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  // &-inner {
+  //   width: 225px;
+  //   height: 475px;
+  //   background-color: white;
+  //   border-radius: 15px;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: center;
 
-    button {
-      margin: 10px 0 0 0;
-      padding: 15px;
-      transition: all 0.1s linear;
-      border-radius: 15px;
-      &:hover {
-        background-color: #62727c75;
-      }
-    }
-  }
+  //   button {
+  //     margin: 10px 0 0 0;
+  //     padding: 15px;
+  //     transition: all 0.1s linear;
+  //     border-radius: 15px;
+  //     &:hover {
+  //       background-color: #62727c75;
+  //     }
+  //   }
+  // }
 
   .primary {
     font-weight: 800;
@@ -43,5 +48,6 @@
     opacity: 1;
     width: 250px;
     height: 500px;
+    background: white;
   }
 }

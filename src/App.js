@@ -8,12 +8,10 @@ import "./App.scss";
 
 export const App = () => {
   return (
-    <div className="page-container">
-      <Router>
-        <Route exact path="/" component={Login} />
-        <Route path="/callback" component={Callback} />
-        <Route path="/home" render={props => <Home {...props} />} />
-      </Router>
-    </div>
+    <Router>
+      <Route exact path="/" component={Login} />
+      <Route path="/callback" component={Callback} />
+      <Route path="/home" render={props => <Home {...props} />} />
+    </Router>
   );
 };
