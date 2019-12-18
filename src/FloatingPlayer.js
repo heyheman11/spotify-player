@@ -9,30 +9,11 @@ export const FloatingPlayer = ({ accessToken }) => {
   const [isNoContent, setIsNoContent] = useState(false);
   const [playingInformation, setPlayingInformation] = useState({});
 
-  const handleOnMouseEnter = () => {
-    setIsMouseOn(true);
-  };
-
-  const handleOnMouseLeave = () => {
-    setIsMouseOn(false);
-  };
-
-  const handlePlayingInfo = data => {
-    setPlayingInformation({
-      isPlaying: data.is_playing,
-      artistName: data.item.album.artists[0].name,
-      albumName: data.item.album.name,
-      songName: data.item.name,
-      deviceName: data.device.name,
-      progress: Number(data.progress_ms / 1000 / 60)
-    });
-  };
-
   // PUT https://api.spotify.com/v1/me/player/play
   // PUT https://api.spotify.com/v1/me/player/pause
 
   useEffect(() => {
-    fetch(`${SPOTIFY_API_URL}/v1/me/player`, {
+    fetch(`${SPOTIFY_API_URL}/v1/me/player/currently-playing`, {
       method: HTTP.GET,
       headers: {
         Authorization: `Bearer ${accessToken}`
@@ -46,7 +27,38 @@ export const FloatingPlayer = ({ accessToken }) => {
         setIsNoContent(true);
       }
     });
+  });
+
+  useEffect(() => {
+    fetch(`${SPOTIFY_API_URL}v1/me/player/devices`, {
+      method: HTTP.GET,
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then(response => {
+      console.log(response);
+    });
   }, []);
+
+  const handleOnMouseEnter = () => {
+    setIsMouseOn(true);
+  };
+
+  const handleOnMouseLeave = () => {
+    setIsMouseOn(false);
+  };
+
+  const handlePlayingInfo = data => {
+    setPlayingInformation({
+      isPlaying: data.is_playing,
+      artistName: data.item.album.artists[0].name,
+      albumName: data.item.album.name,
+      albumImageLink: data.item.album.images[2].url,
+      songName: data.item.name,
+      deviceName: data.device.name,
+      progress: Number(data.progress_ms / 1000 / 60)
+    });
+  };
 
   const togglePlayback = () => {
     fetch(
@@ -71,33 +83,23 @@ export const FloatingPlayer = ({ accessToken }) => {
     return isNoContent ? (
       <p>{"Nothing is playing!"}</p>
     ) : (
-      <>
+      <div className="floating-player-inner">
+        <h3>Currently playing</h3>
         <p className="primary">{playingInformation.songName}</p>
         <p>{playingInformation.artistName}</p>
         <p>{playingInformation.albumName}</p>
         <button onClick={togglePlayback}>
-          {playingInformation.isPlaying ? (
-            <Pause width="20" height="20" />
-          ) : (
-            <Play width="20" height="20" />
-          )}
+          {playingInformation.isPlaying ? "||" : ">"}
         </button>
-      </>
+      </div>
     );
   };
 
   const renderClosedPlayer = () => {
-    return (
-      <p>
-        {playingInformation.isPlaying ? (
-          <Pause width="20" height="20" />
-        ) : (
-          <Play width="20" height="20" />
-        )}
-      </p>
-    );
+    return <p>{playingInformation.isPlaying ? "||" : ">"}</p>;
   };
 
+  console.log(playingInformation);
   return (
     <div
       onMouseEnter={handleOnMouseEnter}
