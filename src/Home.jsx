@@ -54,7 +54,7 @@ export const Home = ({ location }) => {
       </div>
       <div className="home">
         <RecentlyPlayedContainer accessToken={accessToken} />
-        <FloatingPlayer accessToken={accessToken} />
+        {/* <FloatingPlayer accessToken={accessToken} /> */}
       </div>
     </>
   );

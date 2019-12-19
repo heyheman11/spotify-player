@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap");
 
-.page-container {
-  margin: auto 60px;
-}
-
 p {
   margin: 0;
 }
@@ -31,9 +27,7 @@ body {
 }
 
 .primary {
-  // font-weight: 400;
-  color: grey;
+  color: #fa8314;
+  font-weight: 600;
   margin: 0 0 6px 0;
-}
-.secondary {
 }
