@@ -24,9 +24,3 @@ export const Callback = () => {
 
   return renderElements();
 };
-
-// callback to pass access token to /home
-// Home should store access token, then pass it down to the main components
-// 1. Recently played
-// 2. Profile information
-// 3. Floating player

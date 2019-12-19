@@ -9,9 +9,6 @@ export const FloatingPlayer = ({ accessToken }) => {
   const [isNoContent, setIsNoContent] = useState(false);
   const [playingInformation, setPlayingInformation] = useState({});
 
-  // PUT https://api.spotify.com/v1/me/player/play
-  // PUT https://api.spotify.com/v1/me/player/pause
-
   useEffect(() => {
     fetch(`${SPOTIFY_API_URL}/v1/me/player/currently-playing`, {
       method: HTTP.GET,
@@ -28,17 +25,6 @@ export const FloatingPlayer = ({ accessToken }) => {
       }
     });
   });
-
-  useEffect(() => {
-    fetch(`${SPOTIFY_API_URL}v1/me/player/devices`, {
-      method: HTTP.GET,
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    }).then(response => {
-      console.log(response);
-    });
-  }, []);
 
   const handleOnMouseEnter = () => {
     setIsMouseOn(true);

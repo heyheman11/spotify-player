@@ -43,14 +43,6 @@ export const Home = ({ location }) => {
           <p>{`logged in as: ${userDetails.displayName}`}</p>
           <p>{`email: ${userDetails.email}`}</p>
         </div>
-        {/* <div className="album-scroll">
-          <div>
-            <img src="https://i.scdn.co/image/cfa68245aa41dc540fcb6c51b5994c81db34eac6"></img>
-          </div>
-          <div>
-            <img src="https://i.scdn.co/image/cfa68245aa41dc540fcb6c51b5994c81db34eac6"></img>
-          </div>
-        </div> */}
       </div>
       <div className="home">
         <RecentlyPlayedContainer accessToken={accessToken} />
