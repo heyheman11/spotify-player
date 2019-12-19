@@ -1,4 +1,4 @@
-import { SETTINGS, SCOPE } from "./constants";
+import { SETTINGS, SCOPE } from "./util/constantss";
 import querystring from "querystring";
 
 const getQueryString = () => {

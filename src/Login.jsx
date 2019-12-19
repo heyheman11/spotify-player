@@ -1,6 +1,6 @@
 import React from "react";
 import querystring from "querystring";
-import { SETTINGS, SCOPE } from "./constants.js";
+import { SETTINGS, SCOPE } from "./util/constantss.js";
 import "./Login.scss";
 
 export const Login = () => {

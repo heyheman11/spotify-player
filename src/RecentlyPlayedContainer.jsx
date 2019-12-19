@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RecentlyPlayed } from "./RecentlyPlayed";
-import { SPOTIFY_API_URL, HTTP } from "./constants";
+import { SPOTIFY_API_URL, HTTP } from "./util/constantss";
 
 // Container should make fetch calls
 // Pass down information to children

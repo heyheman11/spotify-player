@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { baseUrl } from "./common";
 import RecentlyPlayedContainer from "./RecentlyPlayedContainer";
 import { FloatingPlayer } from "./FloatingPlayer";
-import { HTTP, SPOTIFY_API_URL } from "./constants";
+import { HTTP, SPOTIFY_API_URL } from "./util/constantss";
 import "./Home.scss";
 
 export const Home = ({ location }) => {
