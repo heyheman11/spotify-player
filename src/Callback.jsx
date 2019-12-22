@@ -12,10 +12,12 @@ export const Callback = () => {
 
   const renderElements = () => {
     if (location.hash) {
-      const accessToken = getToken(location.hash);
       return (
         <Redirect
-          to={{ pathname: "/home", state: { accessToken: accessToken } }}
+          to={{
+            pathname: "/home",
+            state: { accessToken: getToken(location.hash) }
+          }}
         />
       );
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SPOTIFY_API_URL, HTTP } from "./util/constantss";
+import { SPOTIFY_API_URL, HTTP } from "./utils/constants";
 import Play from "../play.svg";
 import Pause from "../pause.svg";
 import "./FloatingPlayer.scss";

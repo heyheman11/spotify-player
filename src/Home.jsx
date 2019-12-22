@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { baseUrl } from "./common";
+import { baseUrl } from "./utils/common";
 import RecentlyPlayedContainer from "./RecentlyPlayedContainer";
 import { FloatingPlayer } from "./FloatingPlayer";
-import { HTTP, SPOTIFY_API_URL } from "./util/constantss";
+import { HTTP, SPOTIFY_API_URL } from "./utils/constants";
 import "./Home.scss";
 
 export const Home = ({ location }) => {
@@ -30,7 +30,8 @@ export const Home = ({ location }) => {
       if (response.status === 401) {
         // Handle a 401
         // Expired token
-        response.json().then();
+
+        response.json().then(data => console.log(data));
       }
       response.json().then(saveDetails);
     });
@@ -46,7 +47,7 @@ export const Home = ({ location }) => {
       </div>
       <div className="home">
         <RecentlyPlayedContainer accessToken={accessToken} />
-        {/* <FloatingPlayer accessToken={accessToken} /> */}
+        <FloatingPlayer accessToken={accessToken} />
       </div>
     </>
   );
