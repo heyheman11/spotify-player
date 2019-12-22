@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /.(jpg|jpeg|png|gif)$/,
@@ -35,10 +35,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html"
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css"
     })
+    // new MiniCssExtractPlugin({
+    //   filename: "[name].css"
+    // })
   ],
   devServer: {
     historyApiFallback: true

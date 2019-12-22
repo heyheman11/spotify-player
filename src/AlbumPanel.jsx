@@ -1,4 +1,5 @@
 import React from "react";
+import "./AlbumPanel.scss";
 
 const AlbumPanel = ({ imageLink }) => {
   return (
