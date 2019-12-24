@@ -1,4 +1,4 @@
 import { configure } from "@storybook/react";
-import "../src/App.scss";
+import "../src/styles/global.scss";
 
 configure(require.context("../src", true, /\.stories\.js$/), module);

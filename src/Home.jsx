@@ -3,9 +3,11 @@ import { baseUrl } from "./utils/common";
 import RecentlyPlayedContainer from "./RecentlyPlayedContainer";
 import { FloatingPlayer } from "./FloatingPlayer";
 import { HTTP, SPOTIFY_API_URL } from "./utils/constants";
+import PropTypes from "prop-types";
 import "./Home.scss";
 
 export const Home = ({ location }) => {
+  // eslint-disable-next-line no-unused-vars
   const [accessToken, setAccessToken] = useState(location.state.accessToken);
   const [userDetails, setUserDetail] = useState({});
 
@@ -51,4 +53,8 @@ export const Home = ({ location }) => {
       </div>
     </>
   );
+};
+
+Home.propTypes = {
+  location: PropTypes.object
 };

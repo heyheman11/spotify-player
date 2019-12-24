@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { SPOTIFY_API_URL, HTTP } from "./utils/constants";
-import Play from "../play.svg";
-import Pause from "../pause.svg";
+import PropTypes from "prop-types";
+// import Play from "../play.svg";
+// import Pause from "../pause.svg";
 import "./FloatingPlayer.scss";
 
 export const FloatingPlayer = ({ accessToken }) => {
@@ -85,7 +86,6 @@ export const FloatingPlayer = ({ accessToken }) => {
     return <p>{playingInformation.isPlaying ? "||" : ">"}</p>;
   };
 
-  console.log(playingInformation);
   return (
     <div
       onMouseEnter={handleOnMouseEnter}
@@ -95,4 +95,8 @@ export const FloatingPlayer = ({ accessToken }) => {
       {isMouseOn ? renderOpenedPlayer() : renderClosedPlayer()}
     </div>
   );
+};
+
+FloatingPlayer.propTypes = {
+  accessToken: PropTypes.string
 };

@@ -1,7 +1,24 @@
 import React from "react";
 import { AlbumPanel } from "./AlbumPanel";
 
-export default { title: "AlbumPanel" };
+export default {
+  title: "Album Panel",
+  decorators: [
+    storyFn => (
+      <div
+        style={{
+          display: "flex",
+          width: "100vw",
+          height: "100vh",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        {storyFn()}
+      </div>
+    )
+  ]
+};
 
 export const withVertical = () => (
   <AlbumPanel

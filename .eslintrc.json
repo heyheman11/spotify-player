@@ -5,5 +5,11 @@
     "ecmaFeatures": {
       "jsx": true
     }
-  }
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "ignorePatterns": ["webpack.config.js"]
 }

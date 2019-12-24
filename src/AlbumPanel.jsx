@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { HTTP } from "./utils/constants";
 import "./AlbumPanel.scss";
+// import Play from "../play.svg";
 
 const ORIENTATION_VALUES = ["vertical", "horizontal"];
 
@@ -20,10 +21,14 @@ const AlbumPanel = ({
     });
   };
 
+  // 1. Show icon on mouseEnter
+  // 2. Display play OR pause icon depending on currently playing
+
   return (
     <div className={`album-panel-container ${orientation}`}>
       <button onClick={playTrackHandler}>
         <img src={imageLink}></img>
+        {/* <Play /> */}
       </button>
       <div className="inner">
         <p>Album Album Album Album</p>

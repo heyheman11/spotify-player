@@ -1,5 +1,4 @@
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -9,7 +8,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: ["babel-loader", "eslint-loader"]
       },
       {
         test: /\.html$/,
@@ -36,9 +35,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "index.html"
     })
-    // new MiniCssExtractPlugin({
-    //   filename: "[name].css"
-    // })
   ],
   devServer: {
     historyApiFallback: true

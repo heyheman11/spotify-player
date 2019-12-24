@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RecentlyPlayed } from "./RecentlyPlayed";
 import { SPOTIFY_API_URL, HTTP } from "./utils/constants";
+import PropTypes from "prop-types";
 
 // Container should make fetch calls
 // Pass down information to children
@@ -42,6 +43,10 @@ const RecentlyPlayedContainer = ({ accessToken }) => {
   }, []);
 
   return <RecentlyPlayed tracks={playingInformation} />;
+};
+
+RecentlyPlayedContainer.propTypes = {
+  accessToken: PropTypes.string
 };
 
 export default RecentlyPlayedContainer;

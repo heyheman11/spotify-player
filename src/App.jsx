@@ -4,7 +4,7 @@ import { Home } from "./Home";
 import { Login } from "./Login";
 import { Callback } from "./Callback";
 
-import "./App.scss";
+import "./styles/global.scss";
 
 export const App = () => {
   return (
