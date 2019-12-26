@@ -1,45 +1,37 @@
-@import "variables.scss";
+@import "styles/variables.scss";
 
-.recently-played {
-  height: 100%;
-  border-radius: $border-radius;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
-  max-width: 1024px;
-  width: 100%;
+.recently-played__track-row {
+  padding: 30px 50px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.466);
+  display: flex;
+  flex-direction: row;
 
-  &__track-row {
-    padding: 30px 50px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.466);
-    display: flex;
-    flex-direction: row;
+  &:hover {
+    background: rgba(155, 155, 155, 0.205);
 
-    &:hover {
-      background: rgba(155, 155, 155, 0.205);
-
-      &:first-child {
-        border-top-left-radius: $border-radius;
-        border-top-right-radius: $border-radius;
-      }
-
-      &:last-child {
-        border-bottom-left-radius: $border-radius;
-        border-bottom-right-radius: $border-radius;
-      }
+    &:first-child {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
     }
 
     &:last-child {
-      border-bottom: none;
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
     }
+  }
 
-    .track-information {
-      margin: 0 0 0 20px;
-      width: 100%;
-    }
+  &:last-child {
+    border-bottom: none;
+  }
 
-    img {
-      // width: 125px;
-      height: 125px;
-      box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
-    }
+  .track-information {
+    margin: 0 0 0 20px;
+    width: 100%;
+  }
+
+  img {
+    // width: 125px;
+    height: 125px;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
   }
 }

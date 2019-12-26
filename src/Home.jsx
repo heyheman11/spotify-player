@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { baseUrl } from "./utils/common";
 import RecentlyPlayedContainer from "./RecentlyPlayedContainer";
-import { FloatingPlayer } from "./FloatingPlayer";
+// import { FloatingPlayer } from "./FloatingPlayer";
+// import { AlbumPanel } from "./AlbumPanel";
 import { HTTP, SPOTIFY_API_URL } from "./utils/constants";
 import PropTypes from "prop-types";
 import "./Home.scss";
@@ -49,7 +50,7 @@ export const Home = ({ location }) => {
       </div>
       <div className="home">
         <RecentlyPlayedContainer accessToken={accessToken} />
-        <FloatingPlayer accessToken={accessToken} />
+        {/* <FloatingPlayer accessToken={accessToken} /> */}
       </div>
     </>
   );

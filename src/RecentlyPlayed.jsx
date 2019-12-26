@@ -16,7 +16,7 @@ export const RecentlyPlayed = ({ tracks }) => {
     ));
   };
 
-  return <div className="recently-played">{getRows()}</div>;
+  return <>{getRows()}</>;
 };
 
 RecentlyPlayed.propTypes = {
