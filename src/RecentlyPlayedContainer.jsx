@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RecentlyPlayed } from "./RecentlyPlayed";
 import { SPOTIFY_API_URL, HTTP } from "./utils/constants";
+import Panel from "./Panel";
 import PropTypes from "prop-types";
 
 // Container should make fetch calls
@@ -9,7 +10,7 @@ import PropTypes from "prop-types";
 
 const RecentlyPlayedContainer = ({ accessToken }) => {
   const [playingInformation, setPlayingInformation] = useState([]);
-  const RECENTLY_PLAYED = "/v1/me/player/recently-played";
+  const RECENTLY_PLAYED = "/v1/me/player/recently-played?limit=50";
 
   const getTracks = ({ items }) => {
     const tracks = items.map(item => {
@@ -42,7 +43,11 @@ const RecentlyPlayedContainer = ({ accessToken }) => {
     });
   }, []);
 
-  return <RecentlyPlayed tracks={playingInformation} />;
+  return (
+    <Panel>
+      <RecentlyPlayed tracks={playingInformation} />
+    </Panel>
+  );
 };
 
 RecentlyPlayedContainer.propTypes = {
