@@ -1,0 +1,25 @@
+.settings-container {
+  span {
+    display: inline-block;
+    margin: 0 0 5px 0;
+  }
+  & li {
+    list-style-type: none;
+    margin: 0 0 10px 0;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.radio-button-group {
+  margin: 0 0 5px 0;
+  label {
+    margin: 0 5px 0 0;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
