@@ -4,8 +4,8 @@ import "./FloatingPlayer.scss";
 
 export const FloatingPlayer = ({
   playingInformation,
-  togglePlayback,
-  isLoading
+  togglePlayback
+  // isLoading
 }) => {
   const [isMouseOn, setIsMouseOn] = useState(false);
 
