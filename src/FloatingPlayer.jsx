@@ -1,31 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { SPOTIFY_API_URL, HTTP } from "./utils/constants";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-// import Play from "../play.svg";
-// import Pause from "../pause.svg";
 import "./FloatingPlayer.scss";
 
-export const FloatingPlayer = ({ accessToken }) => {
+export const FloatingPlayer = ({
+  playingInformation,
+  togglePlayback,
+  isLoading
+}) => {
   const [isMouseOn, setIsMouseOn] = useState(false);
-  const [isNoContent, setIsNoContent] = useState(false);
-  const [playingInformation, setPlayingInformation] = useState({});
-
-  useEffect(() => {
-    fetch(`${SPOTIFY_API_URL}/v1/me/player/currently-playing`, {
-      method: HTTP.GET,
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    }).then(response => {
-      if (response.status === 401) {
-        response.json().then();
-      } else if (response.status === 200) {
-        response.json().then(handlePlayingInfo);
-      } else if (response.status === 204) {
-        setIsNoContent(true);
-      }
-    });
-  });
 
   const handleOnMouseEnter = () => {
     setIsMouseOn(true);
@@ -35,39 +17,8 @@ export const FloatingPlayer = ({ accessToken }) => {
     setIsMouseOn(false);
   };
 
-  const handlePlayingInfo = data => {
-    setPlayingInformation({
-      isPlaying: data.is_playing,
-      artistName: data.item.album.artists[0].name,
-      albumName: data.item.album.name,
-      albumImageLink: data.item.album.images[2].url,
-      songName: data.item.name,
-      deviceName: data.device.name,
-      progress: Number(data.progress_ms / 1000 / 60)
-    });
-  };
-
-  const togglePlayback = () => {
-    fetch(
-      `${SPOTIFY_API_URL}/v1/me/player/${
-        playingInformation.isPlaying ? "pause" : "play"
-      }`,
-      {
-        method: HTTP.PUT,
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      }
-    ).then(response => {
-      // expected RESTful response for PUT
-      if (response.status === 204) {
-        return;
-      }
-    });
-  };
-
   const renderOpenedPlayer = () => {
-    return isNoContent ? (
+    return !playingInformation ? (
       <p>{"Nothing is playing!"}</p>
     ) : (
       <div className="floating-player-inner">
@@ -98,5 +49,7 @@ export const FloatingPlayer = ({ accessToken }) => {
 };
 
 FloatingPlayer.propTypes = {
-  accessToken: PropTypes.string
+  isLoading: PropTypes.bool,
+  playingInformation: PropTypes.object,
+  togglePlayback: PropTypes.func
 };

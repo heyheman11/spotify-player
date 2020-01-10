@@ -1,16 +1,22 @@
 import React from "react";
 import { FloatingPlayer } from "../FloatingPlayer";
 
-export default { title: "Floating Player" };
+export default {
+  title: "Floating Player"
+};
 
-export const withNoContext = () => {
-  <FloatingPlayer />;
+const options = {
+  togglePlayback: () => {},
+  playingInformation: {
+    isPlaying: true,
+    artistName: "Daniel Zambetto",
+    albumName: "One Summer",
+    albumImageLink: "",
+    songName: "What a night",
+    deviceName: "Zamb's iPhone"
+  }
 };
 
 export const playingMusic = () => {
-  <FloatingPlayer />;
-};
-
-export const pausedMusic = () => {
-  <FloatingPlayer />;
+  return <FloatingPlayer {...options} />;
 };

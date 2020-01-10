@@ -1,4 +1,10 @@
 .settings-container {
+  width: 200px;
+  height: auto;
+  border: solid black;
+  border-radius: 25%;
+  padding: 25px;
+  box-shadow: 0 0 0 15px rgba(0, 0, 0, 0.4);
   span {
     display: inline-block;
     margin: 0 0 5px 0;

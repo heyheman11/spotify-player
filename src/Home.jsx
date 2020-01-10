@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { baseUrl } from "./utils/common";
 import RecentlyPlayedContainer from "./RecentlyPlayedContainer";
-// import { FloatingPlayer } from "./FloatingPlayer";
+import FloatingPlayerContainer from "./FloatingPlayerContainer";
 // import { AlbumPanel } from "./AlbumPanel";
 import { HTTP, SPOTIFY_API_URL } from "./utils/constants";
 import PropTypes from "prop-types";
@@ -48,10 +48,10 @@ export const Home = ({ location }) => {
           <p>{`email: ${userDetails.email}`}</p>
         </div>
       </div>
-      <div className="home">
+      <main className="home">
         <RecentlyPlayedContainer accessToken={accessToken} />
-        {/* <FloatingPlayer accessToken={accessToken} /> */}
-      </div>
+        <FloatingPlayerContainer accessToken={accessToken} />
+      </main>
     </>
   );
 };
