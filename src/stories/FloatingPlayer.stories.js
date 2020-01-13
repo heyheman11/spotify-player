@@ -9,10 +9,11 @@ const options = {
   togglePlayback: () => {},
   playingInformation: {
     isPlaying: true,
-    artistName: "Daniel Zambetto",
-    albumName: "One Summer",
-    albumImageLink: "",
-    songName: "What a night",
+    artistName: "Bjork",
+    albumName: "Debut",
+    albumImageLink:
+      "https://i.scdn.co/image/ab67616d00001e02768d171a47a3adae90c7c48a",
+    songName: "Venus as a boy",
     deviceName: "Zamb's iPhone"
   }
 };

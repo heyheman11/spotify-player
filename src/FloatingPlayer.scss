@@ -32,9 +32,22 @@
 }
 
 .floating-player-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 210px;
+    height: 210px;
+    margin: 0 0 10px 0;
+  }
+
   button {
     background-color: grey;
-    padding: 20px;
+    padding: 25px;
+    border-radius: 30%;
+    margin: 10px 0 0 0;
 
     &:hover {
       background-color: lightgrey;

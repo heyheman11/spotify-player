@@ -9,6 +9,8 @@ const ORIENTATION_VALUES = ["vertical", "horizontal"];
 const AlbumPanel = ({
   audioType,
   trackId,
+  artistName,
+  albumName,
   imageLink,
   orientation = ORIENTATION_VALUES[0]
 }) => {
@@ -31,9 +33,8 @@ const AlbumPanel = ({
         {/* <Play /> */}
       </button>
       <div className="inner">
-        <p>Album Album Album Album</p>
-        <p>Song Song Song Song</p>
-        <p>Artist Artist Artist Artist</p>
+        <p>{albumName}</p>
+        <p>{artistName}</p>
       </div>
     </div>
   );
@@ -45,5 +46,7 @@ AlbumPanel.propTypes = {
   audioType: PropTypes.string.isRequired,
   trackId: PropTypes.string.isRequired,
   orientation: PropTypes.oneOf(ORIENTATION_VALUES),
-  imageLink: PropTypes.string.isRequired
+  imageLink: PropTypes.string.isRequired,
+  artistName: PropTypes.string.isRequired,
+  albumName: PropTypes.string.isRequired
 };

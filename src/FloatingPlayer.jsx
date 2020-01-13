@@ -23,9 +23,10 @@ export const FloatingPlayer = ({
     ) : (
       <div className="floating-player-inner">
         <h3>Currently playing</h3>
-        <p className="primary">{playingInformation.songName}</p>
-        <p>{playingInformation.artistName}</p>
+        <img src={playingInformation.albumImageLink} />
+        <h4 className="primary">{playingInformation.songName}</h4>
         <p>{playingInformation.albumName}</p>
+        <p>{playingInformation.artistName}</p>
         <button onClick={togglePlayback}>
           {playingInformation.isPlaying ? "||" : ">"}
         </button>
