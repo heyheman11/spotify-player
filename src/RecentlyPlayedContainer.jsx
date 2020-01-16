@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RecentlyPlayed } from "./RecentlyPlayed";
 import { SPOTIFY_API_URL, HTTP } from "./utils/constants";
-import Panel from "./Panel";
+import Panel from "./Components/Panel";
 import PropTypes from "prop-types";
 
 // Container should make fetch calls

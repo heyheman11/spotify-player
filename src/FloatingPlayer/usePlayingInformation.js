@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { HTTP, SPOTIFY_API_URL } from "./utils/constants";
+import { HTTP, SPOTIFY_API_URL } from "../utils/constants";
 
 export const usePlayingInformation = accessToken => {
   const [isNoContent, setIsNoContent] = useState(false);

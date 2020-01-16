@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./FloatingPlayer.scss";
 
 export const FloatingPlayer = ({
   playingInformation,
-  togglePlayback
-  // isLoading
+  togglePlayback,
+  isPlaying
 }) => {
   const [isMouseOn, setIsMouseOn] = useState(false);
 
@@ -18,24 +19,26 @@ export const FloatingPlayer = ({
   };
 
   const renderOpenedPlayer = () => {
-    return !playingInformation ? (
+    return !isPlaying ? (
       <p>{"Nothing is playing!"}</p>
     ) : (
       <div className="floating-player-inner">
         <h3>Currently playing</h3>
+        <Link to={`/artist/${playingInformation.artistLink.split(":")[2]}`}>
+          {playingInformation.artistName}
+        </Link>
         <img src={playingInformation.albumImageLink} />
         <h4 className="primary">{playingInformation.songName}</h4>
         <p>{playingInformation.albumName}</p>
-        <p>{playingInformation.artistName}</p>
         <button onClick={togglePlayback}>
-          {playingInformation.isPlaying ? "||" : ">"}
+          {playingInformation.isPaused ? "play" : "pause"}
         </button>
       </div>
     );
   };
 
   const renderClosedPlayer = () => {
-    return <p>{playingInformation.isPlaying ? "||" : ">"}</p>;
+    return <p>{playingInformation.isPaused ? ">" : "||"}</p>;
   };
 
   return (
@@ -51,6 +54,17 @@ export const FloatingPlayer = ({
 
 FloatingPlayer.propTypes = {
   isLoading: PropTypes.bool,
-  playingInformation: PropTypes.object,
-  togglePlayback: PropTypes.func
+  playingInformation: PropTypes.shape({
+    position: PropTypes.string,
+    isPaused: PropTypes.string,
+    duration: PropTypes.string,
+    artistName: PropTypes.string,
+    albumName: PropTypes.string,
+    artistLink: PropTypes.string,
+    songName: PropTypes.string,
+    albumImageLink: PropTypes.string,
+    device: PropTypes.string
+  }),
+  togglePlayback: PropTypes.func,
+  isPlaying: PropTypes.bool
 };
