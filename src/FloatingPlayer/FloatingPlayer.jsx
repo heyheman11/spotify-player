@@ -18,22 +18,38 @@ export const FloatingPlayer = ({
     setIsMouseOn(false);
   };
 
+  const getArtistLink = () => {
+    if (playingInformation && playingInformation.artistName) {
+      const { artistName } = playingInformation;
+      if (playingInformation && playingInformation.artistLink) {
+        const link = playingInformation.artistLink.split(":")[2];
+        return (
+          <Link to={`/home/artist/${link}`}>
+            {playingInformation.artistName}
+          </Link>
+        );
+      } else {
+        return artistName;
+      }
+    } else {
+      return null;
+    }
+  };
+
   const renderOpenedPlayer = () => {
     return !isPlaying ? (
-      <p>{"Nothing is playing!"}</p>
+      <p>{"Nothing is playing on this device!"}</p>
     ) : (
-      <div className="floating-player-inner">
+      <>
         <h3>Currently playing</h3>
-        <Link to={`/artist/${playingInformation.artistLink.split(":")[2]}`}>
-          {playingInformation.artistName}
-        </Link>
+        {getArtistLink()}
         <img src={playingInformation.albumImageLink} />
         <h4 className="primary">{playingInformation.songName}</h4>
         <p>{playingInformation.albumName}</p>
         <button onClick={togglePlayback}>
           {playingInformation.isPaused ? "play" : "pause"}
         </button>
-      </div>
+      </>
     );
   };
 
@@ -47,7 +63,9 @@ export const FloatingPlayer = ({
       onMouseLeave={handleOnMouseLeave}
       className="floating-player"
     >
-      {isMouseOn ? renderOpenedPlayer() : renderClosedPlayer()}
+      <div className="floating-player-inner">
+        {isMouseOn ? renderOpenedPlayer() : renderClosedPlayer()}
+      </div>
     </div>
   );
 };
@@ -55,7 +73,7 @@ export const FloatingPlayer = ({
 FloatingPlayer.propTypes = {
   isLoading: PropTypes.bool,
   playingInformation: PropTypes.shape({
-    position: PropTypes.string,
+    position: PropTypes.number,
     isPaused: PropTypes.string,
     duration: PropTypes.string,
     artistName: PropTypes.string,

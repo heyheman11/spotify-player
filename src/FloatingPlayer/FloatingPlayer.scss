@@ -36,6 +36,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  text-align: center;
 
   img {
     width: 210px;
@@ -46,7 +48,7 @@
   button {
     background-color: grey;
     padding: 25px;
-    border-radius: 30%;
+    border-radius: 25px;
     margin: 10px 0 0 0;
 
     &:hover {

@@ -8,26 +8,16 @@ import { HTTP, SPOTIFY_API_URL } from "../utils/constants";
 
 const FloatingPlayerContainer = ({ accessToken }) => {
   const [playerState, setPlayerState] = useState({});
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlayingLocally, setIsPlayingLocally] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
   const playingInformation = usePlayingInformation(accessToken);
   const spotifyPlayerRef = useRef(null);
 
   useEffect(() => {
-    // if (window.Spotify) {
-    //   spotifyPlayerRef.current = new Spotify.Player({
-    //     name: "Spotify Player",
-    //     getOAuthToken: cb => {
-    //       cb(accessToken);
-    //     }
-    //   });
-    //   setIsPlayerReady(true);
-    // }
-
     window.onSpotifyWebPlaybackSDKReady = () => {
       // eslint-disable-next-line no-undef
       spotifyPlayerRef.current = new Spotify.Player({
-        name: "Spotify Player",
+        name: "Hairy Player",
         getOAuthToken: cb => {
           cb(accessToken);
         }
@@ -71,7 +61,7 @@ const FloatingPlayerContainer = ({ accessToken }) => {
       spotifyPlayerRef.current.addListener("player_state_changed", state => {
         console.log(state);
         if (state) {
-          setIsPlaying(true);
+          setIsPlayingLocally(true);
           setPlayerState({
             position: state.position,
             isPaused: state.paused,
@@ -83,7 +73,7 @@ const FloatingPlayerContainer = ({ accessToken }) => {
             albumImageLink: state.track_window.current_track.album.images[0].url
           });
         } else {
-          setIsPlaying(false);
+          setIsPlayingLocally(false);
         }
       });
 
@@ -108,7 +98,7 @@ const FloatingPlayerContainer = ({ accessToken }) => {
   const togglePlayback = () => {
     fetch(
       `${SPOTIFY_API_URL}/v1/me/player/${
-        playerState.isPaused ? "play" : "pause"
+        isPlayingLocally && playerState.isPaused ? "play" : "pause"
       }`,
       {
         method: HTTP.PUT,
@@ -121,9 +111,8 @@ const FloatingPlayerContainer = ({ accessToken }) => {
 
   return (
     <FloatingPlayer
-      // isLoading={playingInformation === null}
       playingInformation={playerState}
-      isPlaying={isPlaying}
+      isPlayingLocally={isPlayingLocally}
       togglePlayback={togglePlayback}
     />
   );
