@@ -1,7 +1,13 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 
-const RadioButton = ({ title, value, optionSelected, handleChange }) => {
+interface IRadioButtonProps {
+  title: string;
+  value: string;
+  optionSelected: string;
+  handleChange: (event: React.ChangeEvent): void;
+}
+
+const RadioButton: React.FC<IRadioButtonProps> = ({ title, value, optionSelected, handleChange }) => {
   return (
     <label>
       <input
@@ -18,10 +24,3 @@ const RadioButton = ({ title, value, optionSelected, handleChange }) => {
 };
 
 export { RadioButton };
-
-RadioButton.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  optionSelected: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired
-};
