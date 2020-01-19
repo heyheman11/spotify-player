@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import querystring from "querystring";
 import { SETTINGS, SCOPE } from "./utils/constants";
 import "./Login.scss";

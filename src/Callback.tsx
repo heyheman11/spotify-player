@@ -1,10 +1,10 @@
-import React from "react";
+import * as React from "react";
 import { InfoPanel } from "./Components/InfoPanel";
 import { Redirect } from "react-router-dom";
 
-export const Callback = () => {
-  const getToken = hashString => {
-    return hashString
+export const Callback: React.FC<{}> = () => {
+  const getToken = (hash: String) => {
+    return hash
       .substring(1)
       .split("&")[0]
       .split("=")[1];

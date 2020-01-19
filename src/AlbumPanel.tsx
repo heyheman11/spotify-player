@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import { HTTP } from "./utils/constants";
 import "./AlbumPanel.scss";
 
@@ -41,11 +40,11 @@ const AlbumPanel = ({
 
 export { AlbumPanel };
 
-AlbumPanel.propTypes = {
-  audioType: PropTypes.string.isRequired,
-  trackId: PropTypes.string.isRequired,
-  orientation: PropTypes.oneOf(ORIENTATION_VALUES),
-  imageLink: PropTypes.string.isRequired,
-  artistName: PropTypes.string.isRequired,
-  albumName: PropTypes.string.isRequired
-};
+// AlbumPanel.propTypes = {
+//   audioType: PropTypes.string.isRequired,
+//   trackId: PropTypes.string.isRequired,
+//   orientation: PropTypes.oneOf(ORIENTATION_VALUES),
+//   imageLink: PropTypes.string.isRequired,
+//   artistName: PropTypes.string.isRequired,
+//   albumName: PropTypes.string.isRequired
+// };

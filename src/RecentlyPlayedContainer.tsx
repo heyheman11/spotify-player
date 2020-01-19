@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from "react";
+import * as React from "react";
 import { RecentlyPlayed } from "./RecentlyPlayed";
 import { SPOTIFY_API_URL, HTTP } from "./utils/constants";
 import Panel from "./Components/Panel";
-import PropTypes from "prop-types";
+import { ContainerProps, ITrack } from './interfaces/global';
 
-// Container should make fetch calls
-// Pass down information to children
-// Tell Home when access token has expired
-
-const RecentlyPlayedContainer = ({ accessToken }) => {
-  const [playingInformation, setPlayingInformation] = useState([]);
-  const RECENTLY_PLAYED = "/v1/me/player/recently-played?limit=50";
+const RecentlyPlayedContainer: React.FC<ContainerProps> = (props) => {
+  const [playingInformation, setPlayingInformation] = React.useState<ITrack[] | null[]>([]);
+  const RECENTLY_PLAYED: string = "/v1/me/player/recently-played?limit=50";
 
   const getTracks = ({ items }) => {
-    const tracks = items.map(item => {
+    const tracks = items.map((item: any) : ITrack => {
       return {
         artistName: item.track.album.artists[0].name,
         artistLink: item.track.album.artists[0].href,
         albumName: item.track.album.name,
-        albumLink: item.track.album.href,
+        albumLink: item.track.album.href, 
         trackName: item.track.name,
         albumCoverLink: item.track.album.images[1].url,
         playedTime: item.played_at
@@ -27,11 +23,11 @@ const RecentlyPlayedContainer = ({ accessToken }) => {
     setPlayingInformation(tracks);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetch(`${SPOTIFY_API_URL}${RECENTLY_PLAYED}`, {
       method: HTTP.GET,
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${props.accessToken}`
       }
     }).then(response => {
       if (response.status === 401) {
@@ -48,10 +44,6 @@ const RecentlyPlayedContainer = ({ accessToken }) => {
       <RecentlyPlayed tracks={playingInformation} />
     </Panel>
   );
-};
-
-RecentlyPlayedContainer.propTypes = {
-  accessToken: PropTypes.string
 };
 
 export default RecentlyPlayedContainer;

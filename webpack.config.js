@@ -6,9 +6,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
-        use: ["babel-loader", "eslint-loader"]
+        use: ["ts-loader", "eslint-loader"]
       },
       {
         test: /\.html$/,
@@ -28,8 +28,12 @@ module.exports = {
       }
     ]
   },
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM"
+  },
   resolve: {
-    extensions: [".ts", ".js", ".jsx"]
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   plugins: [
     new HtmlWebpackPlugin({
