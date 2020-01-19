@@ -6,7 +6,7 @@ import "./FloatingPlayer.scss";
 export const FloatingPlayer = ({
   playingInformation,
   togglePlayback,
-  isPlaying
+  isPlayingLocally
 }) => {
   const [isMouseOn, setIsMouseOn] = useState(false);
 
@@ -37,7 +37,7 @@ export const FloatingPlayer = ({
   };
 
   const renderOpenedPlayer = () => {
-    return !isPlaying ? (
+    return !isPlayingLocally ? (
       <p>{"Nothing is playing on this device!"}</p>
     ) : (
       <>
@@ -84,5 +84,5 @@ FloatingPlayer.propTypes = {
     device: PropTypes.string
   }),
   togglePlayback: PropTypes.func,
-  isPlaying: PropTypes.bool
+  isPlayingLocally: PropTypes.bool
 };
