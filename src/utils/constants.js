@@ -27,7 +27,9 @@ const SCOPE = [
   "user-read-private",
   "user-read-email",
   "user-read-recently-played",
-  "user-modify-playback-state"
+  "user-modify-playback-state",
+  "streaming",
+  "user-read-private"
 ];
 
 export { HTTP, SETTINGS, SCOPE, SPOTIFY_API_URL, ALERTS };

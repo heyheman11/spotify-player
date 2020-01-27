@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { baseUrl } from "./utils/common";
 import RecentlyPlayedContainer from "./RecentlyPlayedContainer";
-import FloatingPlayerContainer from "./FloatingPlayerContainer";
+import FloatingPlayerContainer from "./FloatingPlayer/FloatingPlayerContainer";
 // import { AlbumPanel } from "./AlbumPanel";
 import { HTTP, SPOTIFY_API_URL } from "./utils/constants";
 import PropTypes from "prop-types";
