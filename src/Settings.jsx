@@ -1,32 +1,6 @@
 import React from "react";
-import RadioButtonGroup from "./RadioButtonGroup";
+import RadioButtonGroup from "./Components/RadioButtonGroup";
 import "./Settings.scss";
-
-// const userSettings = {
-//   options: [
-//     {
-//       title: "recentlyPlayed",
-//       show: true,
-//       style: "table",
-//       api: {
-//         endpoint: "/v1/me/player/recently-played?limit=50",
-//         params: {
-//           limit: "50"
-//         }
-//       }
-//     },
-//     {
-//       title: "floatingPlayer",
-//       show: true
-//     },
-//     {
-//       title: "likedSongs",
-//       show: true,
-//       style: "carousel",
-//       api: { endpoint: "", params: {} }
-//     }
-//   ]
-// };
 
 const options = {
   options: [
