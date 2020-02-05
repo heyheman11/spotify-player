@@ -44,7 +44,7 @@ module.exports = {
       template: "./index.html"
     }),
     new MiniCssExtractPlugin({
-      fileName: "[name].[hash].css"
+      fileName: "[name].bundle.css"
     })
   ],
   devServer: {
@@ -52,6 +52,6 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[hash].js"
+    filename: "[name].bundle.js"
   }
 };

@@ -13,17 +13,29 @@ const FloatingPlayerContainer = ({ accessToken }) => {
   const playingInformation = usePlayingInformation(accessToken);
   const spotifyPlayerRef = useRef(null);
 
+  const checkForSpotify = () => {
+    return new Promise(resolve => {
+      if (window.Spotify) {
+        resolve(window.Spotify);
+      } else {
+        window.onSpotifyWebPlaybackSDKReady = () => resolve(window.Spotify);
+      }
+    })
+  }
+
   useEffect(() => {
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      // eslint-disable-next-line no-undef
-      spotifyPlayerRef.current = new Spotify.Player({
-        name: "Hairy Player",
-        getOAuthToken: cb => {
-          cb(accessToken);
-        }
+    if (window.Spotify) {
+      checkForSpotify().then(() => {
+        // eslint-disable-next-line no-undef
+        spotifyPlayerRef.current = new Spotify.Player({
+          name: "Hairy Player",
+          getOAuthToken: cb => {
+            cb(accessToken);
+          }
+        });
+        setIsPlayerReady(true);
       });
-      setIsPlayerReady(true);
-    };
+    }
   }, []);
 
   useEffect(() => {
