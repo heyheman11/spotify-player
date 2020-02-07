@@ -11,10 +11,12 @@ RUN npm install -g yarn
 RUN yarn
 RUN yarn build
 
-# FROM nginx:latest
+FROM nginx:latest
 
-# COPY ./nginx.conf ./nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# COPY --from=NODE /usr/app/src/build /nginx/html
+COPY --from=BUILDER /usr/app/src/dist/ /usr/share/nginx/html
 
-# CMD ["nginx", "-g", "dameon"]
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
