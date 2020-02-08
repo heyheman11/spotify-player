@@ -3,29 +3,28 @@
 import React, { useEffect, useState, useRef } from "react";
 import { FloatingPlayer } from "./FloatingPlayer";
 import PropTypes from "prop-types";
-import { usePlayingInformation } from "./usePlayingInformation";
+// import { usePlayingInformation } from "./usePlayingInformation";
 import { HTTP, SPOTIFY_API_URL } from "../utils/constants";
 
 const FloatingPlayerContainer = ({ accessToken }) => {
   const [playerState, setPlayerState] = useState({});
   const [isPlayingLocally, setIsPlayingLocally] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
-  const playingInformation = usePlayingInformation(accessToken);
+  // const playingInformation = usePlayingInformation(accessToken);
   const spotifyPlayerRef = useRef(null);
 
-  const handelScriptLoad = () => {
-    return new Promise(resolve => {
-      if (window.Spotify) {
-        resolve();
-      } else {
-        window.onSpotifyWebPlaybackSDKReady = resolve;
-      }
-    })
-  }
+  // const handelScriptLoad = () => {
+  //   return new Promise(resolve => {
+  //     if (window.Spotify) {
+  //       resolve();
+  //     } else {
+  //       window.onSpotifyWebPlaybackSDKReady = resolve;
+  //     }
+  //   })
+  // }
 
   useEffect(() => {
-    handelScriptLoad().then(() => {
-      // eslint-disable-next-line no-undef
+    if (window.Spotify) {
       spotifyPlayerRef.current = new Spotify.Player({
         name: "Hairy Player",
         getOAuthToken: cb => {
@@ -33,11 +32,23 @@ const FloatingPlayerContainer = ({ accessToken }) => {
         }
       });
       setIsPlayerReady(true);
-    });
+    }
+
+    // eslint-disable-next-line no-undef
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      spotifyPlayerRef.current = new Spotify.Player({
+        name: "Hair Player",
+        getOAuthToken: cb => {
+          cb(accessToken);
+        }
+      });
+      setIsPlayerReady(true);
+    };
   }, []);
 
   useEffect(() => {
     if (isPlayerReady) {
+      console.log('here')
       spotifyPlayerRef.current.connect();
     }
   }, [isPlayerReady]);

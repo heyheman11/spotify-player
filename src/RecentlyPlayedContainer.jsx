@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 
 const RecentlyPlayedContainer = ({ accessToken }) => {
   const [playingInformation, setPlayingInformation] = useState([]);
-  const RECENTLY_PLAYED = "/v1/me/player/recently-played?limit=50";
+  const RECENTLY_PLAYED = "/v1/me/player/recently-played";
 
   const getTracks = ({ items }) => {
     const tracks = items.map(item => {
