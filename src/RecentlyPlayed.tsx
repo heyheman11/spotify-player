@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./RecentlyPlayed.scss";
 
+
+
 export const RecentlyPlayed = ({ tracks }) => {
   const getRows = () => {
     return tracks.map((item, index) => (

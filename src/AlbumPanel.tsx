@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import PropTypes from "prop-types";
 import { HTTP } from "./utils/constants";
 import "./AlbumPanel.scss";
@@ -13,9 +13,9 @@ const AlbumPanel = ({
   imageLink,
   orientation = ORIENTATION_VALUES[0]
 }) => {
-  const playTrackHandler = event => {
+  const playTrackHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault;
-    const body = { uris: [`spotify:${audioType}:${trackId}`] };
+    const body: any  = { uris: [`spotify:${audioType}:${trackId}`] };
     fetch("https://api.spotify.com/v1/me/player/play", {
       method: HTTP.PUT,
       body
