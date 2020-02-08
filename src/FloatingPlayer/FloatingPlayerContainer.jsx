@@ -13,8 +13,18 @@ const FloatingPlayerContainer = ({ accessToken }) => {
   const playingInformation = usePlayingInformation(accessToken);
   const spotifyPlayerRef = useRef(null);
 
+  const handelScriptLoad = () => {
+    return new Promise(resolve => {
+      if (window.Spotify) {
+        resolve();
+      } else {
+        window.onSpotifyWebPlaybackSDKReady = resolve;
+      }
+    })
+  }
+
   useEffect(() => {
-    window.onSpotifyWebPlaybackSDKReady = () => {
+    handelScriptLoad().then(() => {
       // eslint-disable-next-line no-undef
       spotifyPlayerRef.current = new Spotify.Player({
         name: "Hairy Player",
@@ -23,7 +33,7 @@ const FloatingPlayerContainer = ({ accessToken }) => {
         }
       });
       setIsPlayerReady(true);
-    };
+    });
   }, []);
 
   useEffect(() => {
