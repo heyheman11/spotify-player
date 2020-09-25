@@ -1,20 +1,29 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { RadioButton } from "./RadioButton";
 
-const RadioButtonGroup = ({ values, title, defaultValue }) => {
-  const [optionSelected, setOptionSelected] = useState(
+interface RadioButtonGroupProps {
+  values: string[];
+  title: string;
+  defaultValue?: string;
+}
+
+const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
+  values,
+  title,
+  defaultValue,
+}) => {
+  const [optionSelected, setOptionSelected] = React.useState(
     defaultValue === null || defaultValue === undefined
       ? values[0]
       : defaultValue
   );
 
-  const handleChange = event => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOptionSelected(event.target.value);
   };
 
   const getButtons = () => {
-    return values.map((item, index) => (
+    return values.map((item, index: number) => (
       <RadioButton
         value={item}
         key={index}
@@ -25,12 +34,6 @@ const RadioButtonGroup = ({ values, title, defaultValue }) => {
     ));
   };
   return <div className="radio-button-group">{getButtons()}</div>;
-};
-
-RadioButtonGroup.propTypes = {
-  values: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string,
-  defaultValue: PropTypes.string
 };
 
 export default RadioButtonGroup;

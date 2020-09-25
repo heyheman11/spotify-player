@@ -1,5 +1,5 @@
 import React from "react";
-import querystring from "querystring";
+import * as querystring from "querystring";
 import { SETTINGS, SCOPE } from "./utils/constants";
 import "./Login.scss";
 
@@ -14,6 +14,7 @@ export const Login = () => {
   };
 
   const baseUrl = `${SETTINGS.SPOTIFY_BASE_URL}/authorize?${getQueryString()}`;
+  
   return (
     <div className="login-page">
       <h1>Spotify Player</h1>

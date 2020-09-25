@@ -4,22 +4,26 @@ import RecentlyPlayedContainer from "./RecentlyPlayedContainer";
 import FloatingPlayerContainer from "./FloatingPlayer/FloatingPlayerContainer";
 // import { AlbumPanel } from "./AlbumPanel";
 import { HTTP, SPOTIFY_API_URL } from "./utils/constants";
-import PropTypes from "prop-types";
 import "./Home.scss";
+
+interface UserDetails {
+  displayName: string;
+  email: string;
+}
 
 export const Home = ({ location }) => {
   // eslint-disable-next-line no-unused-vars
   const [accessToken, setAccessToken] = useState(location.state.accessToken);
-  const [userDetails, setUserDetail] = useState({});
+  const [userDetails, setUserDetail] = useState<UserDetails>();
 
   if (!accessToken) {
-    window.location = baseUrl;
+    window.location.assign(baseUrl);
   }
 
-  const saveDetails = data => {
+  const saveDetails = (data) => {
     setUserDetail({
       displayName: data.display_name,
-      email: data.email
+      email: data.email,
     });
   };
 
@@ -27,35 +31,38 @@ export const Home = ({ location }) => {
     fetch(`${SPOTIFY_API_URL}/v1/me`, {
       method: HTTP.GET,
       headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    }).then(response => {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }).then((response) => {
       if (response.status === 401) {
-        // Handle a 401
-        // Expired token
-
-        response.json().then(data => console.log(data));
+        response.json().then((data) => console.log(data));
       }
       response.json().then(saveDetails);
     });
   }, []);
 
+  const getProfile = () => {
+    return (
+      <div className="profile">
+        {userDetails && userDetails ? (
+          <>
+            <p>{`logged in as: ${userDetails?.displayName}`}</p>
+            <p>{`email: ${userDetails?.email}`}</p>
+          </>
+        ) : (
+          <div className="profile-loading"></div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <>
-      <div className="top-container">
-        <div className="profile">
-          <p>{`logged in as: ${userDetails.displayName}`}</p>
-          <p>{`email: ${userDetails.email}`}</p>
-        </div>
-      </div>
+      <div className="top-container">{getProfile()}</div>
       <main className="home">
         <RecentlyPlayedContainer accessToken={accessToken} />
         <FloatingPlayerContainer accessToken={accessToken} />
       </main>
     </>
   );
-};
-
-Home.propTypes = {
-  location: PropTypes.object
 };

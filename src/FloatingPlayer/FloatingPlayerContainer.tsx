@@ -1,17 +1,21 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from "react";
 import { FloatingPlayer } from "./FloatingPlayer";
-import PropTypes from "prop-types";
 // import { usePlayingInformation } from "./usePlayingInformation";
 import { HTTP, SPOTIFY_API_URL } from "../utils/constants";
+import type { PlayerState } from "./typings";
 
-const FloatingPlayerContainer = ({ accessToken }) => {
-  const [playerState, setPlayerState] = useState({});
+interface FloatingPlayerContainerProps {
+  accessToken: string;
+}
+
+const FloatingPlayerContainer: React.FC<FloatingPlayerContainerProps> = ({
+  accessToken,
+}) => {
+  const [playerState, setPlayerState] = useState<PlayerState>();
   const [isPlayingLocally, setIsPlayingLocally] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
   // const playingInformation = usePlayingInformation(accessToken);
-  const spotifyPlayerRef = useRef(null);
+  const spotifyPlayerRef = useRef<any>();
 
   // const handelScriptLoad = () => {
   //   return new Promise(resolve => {
@@ -27,9 +31,9 @@ const FloatingPlayerContainer = ({ accessToken }) => {
     if (window.Spotify) {
       spotifyPlayerRef.current = new Spotify.Player({
         name: "Hairy Player",
-        getOAuthToken: cb => {
+        getOAuthToken: (cb) => {
           cb(accessToken);
-        }
+        },
       });
       setIsPlayerReady(true);
     }
@@ -38,9 +42,9 @@ const FloatingPlayerContainer = ({ accessToken }) => {
     window.onSpotifyWebPlaybackSDKReady = () => {
       spotifyPlayerRef.current = new Spotify.Player({
         name: "Hair Player",
-        getOAuthToken: cb => {
+        getOAuthToken: (cb) => {
           cb(accessToken);
-        }
+        },
       });
       setIsPlayerReady(true);
     };
@@ -48,7 +52,7 @@ const FloatingPlayerContainer = ({ accessToken }) => {
 
   useEffect(() => {
     if (isPlayerReady) {
-      console.log('here')
+      console.log("here");
       spotifyPlayerRef.current.connect();
     }
   }, [isPlayerReady]);
@@ -79,7 +83,7 @@ const FloatingPlayerContainer = ({ accessToken }) => {
       });
 
       // Playback status updates
-      spotifyPlayerRef.current.addListener("player_state_changed", state => {
+      spotifyPlayerRef.current.addListener("player_state_changed", (state) => {
         console.log(state);
         if (state) {
           setIsPlayingLocally(true);
@@ -91,7 +95,8 @@ const FloatingPlayerContainer = ({ accessToken }) => {
             artistLink: state.track_window.current_track.artists[0].uri,
             albumName: state.track_window.current_track.album.name,
             songName: state.track_window.current_track.name,
-            albumImageLink: state.track_window.current_track.album.images[0].url
+            albumImageLink:
+              state.track_window.current_track.album.images[0].url,
           });
         } else {
           setIsPlayingLocally(false);
@@ -116,31 +121,27 @@ const FloatingPlayerContainer = ({ accessToken }) => {
     }
   }, [isPlayerReady]);
 
-  const togglePlayback = () => {
-    fetch(
+  const togglePlayback = async () => {
+    await fetch(
       `${SPOTIFY_API_URL}/v1/me/player/${
-        isPlayingLocally && playerState.isPaused ? "play" : "pause"
+        isPlayingLocally && playerState?.isPaused ? "play" : "pause"
       }`,
       {
         method: HTTP.PUT,
         headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
+          Authorization: `Bearer ${accessToken}`,
+        },
       }
-    ).then(response => {});
+    );
   };
 
-  return (
+  return playerState ? (
     <FloatingPlayer
       playingInformation={playerState}
       isPlayingLocally={isPlayingLocally}
       togglePlayback={togglePlayback}
     />
-  );
-};
-
-FloatingPlayerContainer.propTypes = {
-  accessToken: PropTypes.string
+  ) : null;
 };
 
 export default FloatingPlayerContainer;
