@@ -17,8 +17,8 @@ const options = {
     position: 0,
     duration: ""
   },
-  isPlayingLocally: true
-  
+  isPlayingLocally: true,
+  isPlayerReady: false
 };
 
 export const playingMusic = () => {

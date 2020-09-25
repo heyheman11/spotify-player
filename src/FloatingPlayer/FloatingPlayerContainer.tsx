@@ -3,6 +3,7 @@ import { FloatingPlayer } from "./FloatingPlayer";
 // import { usePlayingInformation } from "./usePlayingInformation";
 import { HTTP, SPOTIFY_API_URL } from "../utils/constants";
 import { PlayerState } from "./typings";
+import { Loader } from "../Components/Loader";
 
 interface FloatingPlayerContainerProps {
   accessToken: string;
@@ -135,13 +136,14 @@ const FloatingPlayerContainer: React.FC<FloatingPlayerContainerProps> = ({
     );
   };
 
-  return playerState ? (
+  return (
     <FloatingPlayer
       playingInformation={playerState}
       isPlayingLocally={isPlayingLocally}
       togglePlayback={togglePlayback}
+      isPlayerReady={isPlayerReady}
     />
-  ) : null;
+  );
 };
 
 export default FloatingPlayerContainer;

@@ -4,6 +4,7 @@ import RecentlyPlayedContainer from "./RecentlyPlayed/RecentlyPlayedContainer";
 import FloatingPlayerContainer from "./FloatingPlayer/FloatingPlayerContainer";
 // import { AlbumPanel } from "./AlbumPanel";
 import { HTTP, SPOTIFY_API_URL } from "./utils/constants";
+import { Loader } from "./Components/Loader";
 import "./Home.scss";
 
 interface UserDetails {
@@ -50,7 +51,7 @@ export const Home = ({ location }) => {
             <p>{`email: ${userDetails?.email}`}</p>
           </>
         ) : (
-          <div className="profile-loading"></div>
+          <Loader />
         )}
       </div>
     );
