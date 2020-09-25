@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import "./FloatingPlayer.scss";
+import type { PlayerState } from "./typings";
 
-export const FloatingPlayer = ({
+interface FloatingPlayerProps {
+  playingInformation: PlayerState;
+  togglePlayback: any;
+  isPlayingLocally: boolean;
+}
+
+export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
   playingInformation,
   togglePlayback,
-  isPlayingLocally
+  isPlayingLocally,
 }) => {
   const [isMouseOn, setIsMouseOn] = useState(false);
 
@@ -54,7 +60,7 @@ export const FloatingPlayer = ({
   };
 
   const renderClosedPlayer = () => {
-    return <p>{playingInformation.isPaused ? ">" : "||"}</p>;
+    return <p>🎹</p>;
   };
 
   return (
@@ -68,21 +74,4 @@ export const FloatingPlayer = ({
       </div>
     </div>
   );
-};
-
-FloatingPlayer.propTypes = {
-  isLoading: PropTypes.bool,
-  playingInformation: PropTypes.shape({
-    position: PropTypes.number,
-    isPaused: PropTypes.string,
-    duration: PropTypes.string,
-    artistName: PropTypes.string,
-    albumName: PropTypes.string,
-    artistLink: PropTypes.string,
-    songName: PropTypes.string,
-    albumImageLink: PropTypes.string,
-    device: PropTypes.string
-  }),
-  togglePlayback: PropTypes.func,
-  isPlayingLocally: PropTypes.bool
 };

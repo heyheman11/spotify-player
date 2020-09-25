@@ -1,9 +1,12 @@
-import * as React from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import "./InfoPanel.scss";
 
-export const InfoPanel = props => {
-  const { type, dialogue } = props;
+interface InfoPanelProps {
+  type: "general" | "important" | "error" | "success";
+  dialogue: string;
+}
+
+export const InfoPanel: React.FC<InfoPanelProps> = ({ type, dialogue }) => {
   return (
     <div className={`info-panel ${type}`}>
       <div className="info-panel-main">
@@ -12,9 +15,4 @@ export const InfoPanel = props => {
       <button>{"X"}</button>
     </div>
   );
-};
-
-InfoPanel.propTypes = {
-  type: PropTypes.oneOf(["general", "important", "error", "success"]),
-  dialogue: PropTypes.string
 };

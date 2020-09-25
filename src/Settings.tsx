@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import RadioButtonGroup from "./Components/RadioButtonGroup";
 import "./Settings.scss";
 

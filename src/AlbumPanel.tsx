@@ -1,23 +1,30 @@
-import * as React from "react";
+import React from "react";
 import { HTTP } from "./utils/constants";
 import "./AlbumPanel.scss";
 
-const ORIENTATION_VALUES = ["vertical", "horizontal"];
+type AlbumPanelOrientation = "vertical" | "horizontal";
 
-const AlbumPanel = ({
+interface AlbumPanelProps {
+  audioType: string;
+  trackId: string;
+  orientation?: AlbumPanelOrientation;
+  imageLink: string;
+  artistName: string;
+  albumName: string;
+}
+
+const AlbumPanel: React.FC<AlbumPanelProps> = ({
   audioType,
   trackId,
   artistName,
   albumName,
   imageLink,
-  orientation = ORIENTATION_VALUES[0]
+  orientation = "vertical",
 }) => {
-  const playTrackHandler = event => {
-    event.preventDefault;
-    const body = { uris: [`spotify:${audioType}:${trackId}`] };
-    fetch("https://api.spotify.com/v1/me/player/play", {
+  const playTrackHandler = async () => {
+    await fetch("https://api.spotify.com/v1/me/player/play", {
       method: HTTP.PUT,
-      body
+      body: JSON.stringify({ uris: [`spotify:${audioType}:${trackId}`] }),
     });
   };
 
@@ -39,12 +46,3 @@ const AlbumPanel = ({
 };
 
 export { AlbumPanel };
-
-// AlbumPanel.propTypes = {
-//   audioType: PropTypes.string.isRequired,
-//   trackId: PropTypes.string.isRequired,
-//   orientation: PropTypes.oneOf(ORIENTATION_VALUES),
-//   imageLink: PropTypes.string.isRequired,
-//   artistName: PropTypes.string.isRequired,
-//   albumName: PropTypes.string.isRequired
-// };

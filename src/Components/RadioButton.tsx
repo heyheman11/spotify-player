@@ -1,13 +1,13 @@
-import * as React from "react";
+import React from "react";
 
-interface IRadioButtonProps {
+interface RadioButtonProps {
   title: string;
   value: string;
   optionSelected: string;
-  handleChange: (event: React.ChangeEvent): void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const RadioButton: React.FC<IRadioButtonProps> = ({ title, value, optionSelected, handleChange }) => {
+const RadioButton: React.FC<RadioButtonProps> = ({ title, value, optionSelected, handleChange }) => {
   return (
     <label>
       <input

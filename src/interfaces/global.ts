@@ -2,7 +2,7 @@ export interface ContainerProps {
   accessToken: string;
 }
 
-export interface ITrack {
+export interface Track {
   artistName: string;
   artistLink: string;
   albumName: string;

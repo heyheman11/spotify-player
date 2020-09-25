@@ -1,13 +1,10 @@
-import * as React from "react";
+import React from "react";
 import { InfoPanel } from "./Components/InfoPanel";
 import { Redirect } from "react-router-dom";
 
 export const Callback: React.FC<{}> = () => {
   const getToken = (hash: String) => {
-    return hash
-      .substring(1)
-      .split("&")[0]
-      .split("=")[1];
+    return hash.substring(1).split("&")[0].split("=")[1];
   };
 
   const renderElements = () => {
@@ -16,7 +13,7 @@ export const Callback: React.FC<{}> = () => {
         <Redirect
           to={{
             pathname: "/home",
-            state: { accessToken: getToken(location.hash) }
+            state: { accessToken: getToken(location.hash) },
           }}
         />
       );

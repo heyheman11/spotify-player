@@ -3,13 +3,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   module: {
     rules: [
       {
         test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
-        use: ["ts-loader", "eslint-loader"]
+        use: ["ts-loader"]
       },
       {
         test: /\.html$/,
@@ -35,10 +35,6 @@ module.exports = {
         use: ["@svgr/webpack"]
       }
     ]
-  },
-  externals: {
-    "react": "React",
-    "react-dom": "ReactDOM"
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
