@@ -1,5 +1,5 @@
 import React from "react";
-import { Track } from "./interfaces/global";
+import { Track } from "../interfaces/global";
 import "./RecentlyPlayed.scss";
 
 interface RecentlyPlayedProps {

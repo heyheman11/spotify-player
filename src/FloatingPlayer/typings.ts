@@ -1,9 +1,9 @@
 export interface PlayerState {
   position: number;
-  isPaused: string;
+  isPaused: boolean;
   duration: string;
   artistName: string;
-  artistLink: string;
+  artistLink?: string;
   albumName: string;
   songName: string;
   albumImageLink: string;

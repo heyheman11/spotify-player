@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./FloatingPlayer.scss";
-import type { PlayerState } from "./typings";
+import { PlayerState } from "./typings";
 
 interface FloatingPlayerProps {
   playingInformation: PlayerState;

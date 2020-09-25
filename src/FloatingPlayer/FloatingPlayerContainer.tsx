@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { FloatingPlayer } from "./FloatingPlayer";
 // import { usePlayingInformation } from "./usePlayingInformation";
 import { HTTP, SPOTIFY_API_URL } from "../utils/constants";
-import type { PlayerState } from "./typings";
+import { PlayerState } from "./typings";
 
 interface FloatingPlayerContainerProps {
   accessToken: string;

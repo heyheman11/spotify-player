@@ -5,9 +5,7 @@ module.exports = async ({ config, mode }) => {
   config.module.rules.push({
     test: /\.(css|scss)$/,
     use: ["style-loader", "css-loader", "sass-loader"],
-    include: path.resolve(__dirname, "../")
+    include: path.resolve(__dirname, "../src/")
   });
-
-  // Return the altered config
   return config;
 };

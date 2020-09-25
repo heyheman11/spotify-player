@@ -1,5 +1,5 @@
 import React from "react";
-import { AlbumPanel } from "../AlbumPanel";
+import { AlbumPanel } from "./AlbumPanel";
 
 export default {
   title: "Album Panel",
