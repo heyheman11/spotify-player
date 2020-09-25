@@ -7,6 +7,7 @@ import { Callback } from "./Callback";
 import "./styles/global.scss";
 
 export const App = () => {
+
   return (
     <Router>
       <Route exact path="/" component={Login} />
