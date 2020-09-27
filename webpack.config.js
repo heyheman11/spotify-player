@@ -9,49 +9,49 @@ module.exports = {
       {
         test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
-        use: ["ts-loader"]
+        use: ["ts-loader"],
       },
       {
         test: /\.html$/,
-        use: ["html-loader"]
+        use: ["html-loader"],
       },
       {
         test: /\.(css|scss)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: process.env.NODE_ENV === "development" }
+            options: { hmr: process.env.NODE_ENV === "development" },
           },
           "css-loader",
-          "sass-loader"
-        ]
+          "sass-loader",
+        ],
       },
       {
         test: /.(jpg|jpeg|png|gif)$/,
-        use: ["url-loader"]
+        use: ["url-loader"],
       },
       {
         test: /\.svg$/,
-        use: ["@svgr/webpack"]
-      }
-    ]
+        use: ["@svgr/webpack"],
+      },
+    ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./index.html"
+      template: "./index.html",
     }),
     new MiniCssExtractPlugin({
-      fileName: "[name].[hash].css"
-    })
+      fileName: "[name].[hash].css",
+    }),
   ],
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[hash].js"
-  }
+    filename: "[name].[hash].js",
+  },
 };
