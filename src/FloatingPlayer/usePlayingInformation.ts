@@ -27,7 +27,7 @@ export const usePlayingInformation = (accessToken: string) => {
       },
     }).then((response) => {
       if (response.status === 401) {
-        response.json().then();
+        response.json().then((value) => console.log(value));
       } else if (response.status === 200) {
         response.json().then((data) => {
           setPlayingInformation({

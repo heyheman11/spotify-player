@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { RecentlyPlayed } from "./RecentlyPlayed";
-import { SPOTIFY_API_URL, HTTP } from "./utils/constants";
-import Panel from "./Components/Panel";
-import { ContainerProps, Track } from "./interfaces/global";
+import { SPOTIFY_API_URL, HTTP } from "../utils/constants";
+import Panel from "../Components/Panel";
+import { ContainerProps, Track } from "../interfaces/global";
 
 const RecentlyPlayedContainer: React.FC<ContainerProps> = (props) => {
-  const [playingInformation, setPlayingInformation] = React.useState<Track[]>();
-  const RECENTLY_PLAYED = "/v1/me/player/recently-played?limit=50";
+  const [playingInformation, setPlayingInformation] = useState<Track[]>();
+  const [lastPlayedSongTime, setLastPlayedSongTime] = useState("");
+  const RECENTLY_PLAYED = "/v1/me/player/recently-played?limit=20";
 
   const getTracks = ({ items }) => {
     const tracks = items.map(
-      (item: any): Track => {
+      (item: any, index): Track => {
+        if (index === items.length - 1) {
+          console.log("last item", item.played_at);
+          setLastPlayedSongTime(item.played_at);
+        }
         return {
           artistName: item.track.album.artists[0].name,
           artistLink: item.track.album.artists[0].href,
@@ -25,7 +30,7 @@ const RecentlyPlayedContainer: React.FC<ContainerProps> = (props) => {
     setPlayingInformation(tracks);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch(`${SPOTIFY_API_URL}${RECENTLY_PLAYED}`, {
       method: HTTP.GET,
       headers: {
