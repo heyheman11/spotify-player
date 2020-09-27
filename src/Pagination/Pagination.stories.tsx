@@ -6,5 +6,5 @@ export default {
 };
 
 export const playingMusic = () => {
-  return <Pagination onChange={() => console.log("onForward")} length={3} />;
+  return <Pagination onClick={() => console.log("on click")} length={3} />;
 };

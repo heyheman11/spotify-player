@@ -1,0 +1,26 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 30px;
+  background-color: grey;
+  height: 60px;
+
+  &-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+    margin: 10px;
+    transition: all 0.2s;
+
+    &__selected {
+      height: 50px;
+      width: 50px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+  }
+}
