@@ -19,9 +19,9 @@ export const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ tracks }) => {
           </div>
         </div>
       ));
-    } else {
-      return null;
     }
+
+    return null;
   };
 
   return <>{getRows()}</>;
