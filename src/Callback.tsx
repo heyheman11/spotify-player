@@ -1,5 +1,4 @@
 import React from "react";
-import { InfoPanel } from "./Components/InfoPanel";
 import { Redirect } from "react-router-dom";
 
 export const Callback: React.FC<{}> = () => {
@@ -18,7 +17,7 @@ export const Callback: React.FC<{}> = () => {
         />
       );
     }
-    return <InfoPanel type="error" dialogue={location.search} />;
+    return null;
   };
 
   return renderElements();

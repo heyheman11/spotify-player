@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { FloatingPlayer } from "./FloatingPlayer";
-// import { usePlayingInformation } from "./usePlayingInformation";
+import { usePlayingInformation } from "./usePlayingInformation";
 import { HTTP, SPOTIFY_API_URL } from "../utils/constants";
-import { PlayerState } from "./typings";
+import { SongState } from "./typings";
 import { Loader } from "../Components/Loader";
 
 interface FloatingPlayerContainerProps {
@@ -12,21 +12,16 @@ interface FloatingPlayerContainerProps {
 const FloatingPlayerContainer: React.FC<FloatingPlayerContainerProps> = ({
   accessToken,
 }) => {
-  const [playerState, setPlayerState] = useState<PlayerState>();
+  const [playerState, setPlayerState] = useState<SongState>();
   const [isPlayingLocally, setIsPlayingLocally] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
-  // const playingInformation = usePlayingInformation(accessToken);
+  const [playingInformation, deviceInformation, isPlaying] = usePlayingInformation(accessToken);
   const spotifyPlayerRef = useRef<any>();
 
-  // const handelScriptLoad = () => {
-  //   return new Promise(resolve => {
-  //     if (window.Spotify) {
-  //       resolve();
-  //     } else {
-  //       window.onSpotifyWebPlaybackSDKReady = resolve;
-  //     }
-  //   })
-  // }
+
+  console.log("playingInformation", playingInformation)
+
+  console.log("deviceInformation", deviceInformation)
 
   useEffect(() => {
     if (window.Spotify) {

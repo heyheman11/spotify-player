@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader } from "../Components/Loader";
 import "./FloatingPlayer.scss";
-import { PlayerState } from "./typings";
+import { SongState } from "./typings";
 
 interface FloatingPlayerProps {
-  playingInformation?: PlayerState;
+  playingInformation?: SongState;
   togglePlayback: any;
   isPlayingLocally: boolean;
   isPlayerReady: boolean;
@@ -30,7 +30,7 @@ export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
   const getArtistLink = () => {
     if (playingInformation && playingInformation.artistName) {
       const { artistName } = playingInformation;
-      if (playingInformation && playingInformation.artistLink) {
+      if (playingInformation?.artistLink) {
         const link = playingInformation.artistLink.split(":")[2];
         return (
           <Link to={`/home/artist/${link}`}>
@@ -70,7 +70,10 @@ export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
     if (!isPlayerReady) {
       return <Loader />;
     }
-    return <p>🎹</p>;
+    if (isPlayingLocally) {
+      return <p className="floating-player--icon__dancing">🎵</p>
+    }
+    return <p>🎵</p>;
   };
 
   return (

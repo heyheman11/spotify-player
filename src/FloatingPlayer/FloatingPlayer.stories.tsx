@@ -2,7 +2,7 @@ import React from "react";
 import { FloatingPlayer } from "./FloatingPlayer";
 
 export default {
-  title: "Floating Player"
+  title: "Floating Player",
 };
 
 const options = {
@@ -15,12 +15,24 @@ const options = {
       "https://i.scdn.co/image/ab67616d00001e02768d171a47a3adae90c7c48a",
     songName: "Venus as a boy",
     position: 0,
-    duration: ""
+    duration: "",
   },
   isPlayingLocally: true,
-  isPlayerReady: false
+  isPlayerReady: false,
 };
 
 export const playingMusic = () => {
+  return <FloatingPlayer {...{ ...options, isPlayerReady: true }} />;
+};
+
+export const pausedMusic = () => {
+  return (
+    <FloatingPlayer
+      {...{ ...options, isPlayerReady: true, isPlayingLocally: false }}
+    />
+  );
+};
+
+export const loading = () => {
   return <FloatingPlayer {...options} />;
 };

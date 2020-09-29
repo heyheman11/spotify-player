@@ -16,6 +16,9 @@ export const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ tracks }) => {
             <p className="primary">{item.albumName}</p>
             <p className="secondary">{item.trackName}</p>
             <p className="secondary">{item.artistName}</p>
+            <p className="italics">
+              {new Date(item.playedTime).toLocaleString()}
+            </p>
           </div>
         </div>
       ));
@@ -24,5 +27,5 @@ export const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ tracks }) => {
     return null;
   };
 
-  return <>{getRows()}</>;
+  return <div className="recently-played-container">{getRows()}</div>;
 };

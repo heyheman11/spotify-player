@@ -3,7 +3,8 @@ import { baseUrl } from "./utils/common";
 import RecentlyPlayedContainer from "./RecentlyPlayed/RecentlyPlayedContainer";
 import FloatingPlayerContainer from "./FloatingPlayer/FloatingPlayerContainer";
 // import { AlbumPanel } from "./AlbumPanel";
-import { HTTP, SPOTIFY_API_URL } from "./utils/constants";
+import { HTTP, ENDPOINTS } from "./utils/constants";
+import { request } from "./utils/common";
 import { Loader } from "./Components/Loader";
 import "./Home.scss";
 
@@ -29,17 +30,10 @@ export const Home = ({ location }) => {
   };
 
   useEffect(() => {
-    fetch(`${SPOTIFY_API_URL}/v1/me`, {
-      method: HTTP.GET,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }).then((response) => {
-      if (response.status === 401) {
-        response.json().then((data) => console.log(data));
-      }
-      response.json().then(saveDetails);
-    });
+    request(
+      { url: ENDPOINTS.me, method: HTTP.GET, token: accessToken },
+      saveDetails
+    );
   }, []);
 
   const getProfile = () => {

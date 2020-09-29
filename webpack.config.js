@@ -2,6 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const isDevelopment = true;
+
 module.exports = {
   entry: "./src/index.tsx",
   module: {
@@ -20,7 +22,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: process.env.NODE_ENV === "development" },
+            options: { hmr: isDevelopment },
           },
           "css-loader",
           "sass-loader",

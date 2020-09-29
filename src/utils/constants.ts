@@ -19,6 +19,14 @@ const ALERTS = {
 
 const SPOTIFY_API_URL = "https://api.spotify.com";
 
+const ENDPOINTS = {
+  me: `${SPOTIFY_API_URL}/v1/me`,
+  play: `${SPOTIFY_API_URL}/v1/me/player/play`,
+  player: `${SPOTIFY_API_URL}/v1/me/player`,
+  currentlyPlaying: `${SPOTIFY_API_URL}/v1/me/player/currently-playing`,
+  recentlyPlayed: `${SPOTIFY_API_URL}/v1/me/player/recently-played`
+}
+
 const SCOPE = [
   "user-read-currently-playing",
   "user-read-playback-state",
@@ -32,4 +40,4 @@ const SCOPE = [
   "user-read-private"
 ];
 
-export { HTTP, SETTINGS, SCOPE, SPOTIFY_API_URL, ALERTS };
+export { HTTP, SETTINGS, SCOPE, SPOTIFY_API_URL, ALERTS, ENDPOINTS };
