@@ -15,17 +15,29 @@ const options = {
       "https://i.scdn.co/image/ab67616d00001e02768d171a47a3adae90c7c48a",
     songName: "Venus as a boy",
     position: 0,
-    duration: "",
+    duration: 0,
   },
   isPlayingLocally: true,
   isPlayerReady: false,
+  deviceState: {
+    name: "Spotify Client",
+    type: "Desktop",
+  },
 };
 
-export const playingMusic = () => {
+export const playing = () => {
   return <FloatingPlayer {...{ ...options, isPlayerReady: true }} />;
 };
 
-export const pausedMusic = () => {
+export const paused = () => {
+  return (
+    <FloatingPlayer
+      {...{ ...options, isPlayerReady: true, isPlayingLocally: false }}
+    />
+  );
+};
+
+export const playingOnAnotherDevice = () => {
   return (
     <FloatingPlayer
       {...{ ...options, isPlayerReady: true, isPlayingLocally: false }}

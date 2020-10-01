@@ -22,6 +22,7 @@ const SPOTIFY_API_URL = "https://api.spotify.com";
 const ENDPOINTS = {
   me: `${SPOTIFY_API_URL}/v1/me`,
   play: `${SPOTIFY_API_URL}/v1/me/player/play`,
+  pause:`${SPOTIFY_API_URL}/v1/me/player/pause` ,
   player: `${SPOTIFY_API_URL}/v1/me/player`,
   currentlyPlaying: `${SPOTIFY_API_URL}/v1/me/player/currently-playing`,
   recentlyPlayed: `${SPOTIFY_API_URL}/v1/me/player/recently-played`

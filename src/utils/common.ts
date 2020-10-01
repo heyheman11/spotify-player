@@ -14,10 +14,10 @@ const baseUrl = `${SETTINGS.SPOTIFY_BASE_URL}/authorize?${getQueryString()}`;
 
 /** Wrapper around fetch, will execute callback with results */
 const request = async (
-  { url, token, method },
-  callback: any,
-  emptyCallback?: any
-) => {
+  { url, token, method }: { url: string; token: string; method: string },
+  callback?: (results: unknown) => void,
+  emptyCallback?: (results: unknown) => void
+): Promise<void> => {
   const results = await fetch(url, {
     method,
     headers: {
@@ -25,11 +25,11 @@ const request = async (
     },
   });
 
-  if (results.status === 200) {
+  if (callback && results.status === 200) {
     callback(await results.json());
   }
 
-  if (results.status === 204 && emptyCallback) {
+  if (emptyCallback && results.status === 204) {
     emptyCallback(await results.json());
   }
 };

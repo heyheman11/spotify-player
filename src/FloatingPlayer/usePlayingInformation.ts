@@ -1,12 +1,20 @@
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { HTTP, ENDPOINTS } from "../utils/constants";
 import { request } from "../utils/common";
+import type { SongState, Device } from "./typings";
 
-export const usePlayingInformation = (accessToken: string) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [songState, setSongState] = useState<any>();
-  const [device, setDevice] = useState<any>();
+/**
+ *
+ * Returns information about the users currently playing sessions
+ * @param accessToken
+ *
+ */
+export const usePlayingInformation = (
+  accessToken: string
+): [SongState | undefined, Device | undefined, boolean] => {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [songState, setSongState] = useState<SongState | undefined>();
+  const [device, setDevice] = useState<Device | undefined>();
 
   const setSongStateMapper = ({ is_playing, item, progress_ms }) => {
     setSongState({
@@ -35,7 +43,7 @@ export const usePlayingInformation = (accessToken: string) => {
       { url: ENDPOINTS.player, method: HTTP.GET, token: accessToken },
       setDeviceMapper
     );
-  }, []);
+  }, [accessToken]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -48,9 +56,7 @@ export const usePlayingInformation = (accessToken: string) => {
         setSongStateMapper
       );
     }
-  }, [isPlaying]);
-
-  console.log("isPLaying??", isPlaying)
+  }, [isPlaying, accessToken]);
 
   return [songState, device, isPlaying];
 };

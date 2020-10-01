@@ -9,13 +9,14 @@ export interface Device {
 }
 
 export interface SongState {
-  position: number;
-  isPaused: boolean;
+  position?: number;
+  isPaused?: boolean;
   isPlaying?: boolean;
-  duration: string;
+  duration?: number;
   artistName: string;
   artistLink?: string;
   albumName: string;
   songName: string;
   albumImageLink: string;
+  progress?: number;
 }

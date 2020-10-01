@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader } from "../Components/Loader";
 import "./FloatingPlayer.scss";
-import { SongState } from "./typings";
+import { Device, SongState } from "./typings";
 
 interface FloatingPlayerProps {
   playingInformation?: SongState;
-  togglePlayback: any;
+  togglePlayback: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  /** Is music coming from the browser SDK */
   isPlayingLocally: boolean;
+  /** State of the sdk on the window object */
   isPlayerReady: boolean;
+  deviceState?: Device;
 }
 
 export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
@@ -16,6 +19,7 @@ export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
   togglePlayback,
   isPlayingLocally,
   isPlayerReady,
+  deviceState
 }) => {
   const [isMouseOn, setIsMouseOn] = useState(false);
 
@@ -49,9 +53,26 @@ export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
     if (!isPlayerReady) {
       return <Loader isOnLightBackground />;
     }
+
     if (!isPlayingLocally) {
-      <p>{"Nothing is playing on this device!"}</p>;
+      if (playingInformation) {
+        return (
+          <>
+            <h3>Currently playing</h3>
+            <p>{deviceState?.name}</p>
+            {getArtistLink()}
+            <img src={playingInformation?.albumImageLink} />
+            <h4 className="primary">{playingInformation?.songName}</h4>
+            <p>{playingInformation?.albumName}</p>
+            <button onClick={togglePlayback}>
+              {playingInformation?.isPaused ? "play" : "pause"}
+            </button>
+          </>
+        );
+      }
+      return <p>{"Nothing is playing on this device!"}</p>;
     }
+
     return (
       <>
         <h3>Currently playing</h3>
@@ -71,9 +92,9 @@ export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
       return <Loader />;
     }
     if (isPlayingLocally) {
-      return <p className="floating-player--icon__dancing">🎵</p>
+      return <p className="floating-player--icon__dancing">🎵</p>;
     }
-    return <p>🎵</p>;
+    return <p className="floating-player--icon">🎵</p>;
   };
 
   return (
