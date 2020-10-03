@@ -94,7 +94,7 @@ const FloatingPlayerContainer: React.FC<FloatingPlayerContainerProps> = ({
             setIsPlayingLocally(true);
             setPlayerState({
               position: state.position,
-              isPaused: state.paused,
+              isPlaying: !state.paused,
               duration: state.duration,
               artistName: state.track_window.current_track.artists[0].name,
               artistLink: state.track_window.current_track.artists[0].uri,
@@ -130,9 +130,9 @@ const FloatingPlayerContainer: React.FC<FloatingPlayerContainerProps> = ({
   const togglePlayback = async () => {
     await request({
       url:
-        isPlayingLocally && playerState?.isPaused
-          ? ENDPOINTS.play
-          : ENDPOINTS.pause,
+        playerState?.isPlaying || playingInformation?.isPlaying
+          ? ENDPOINTS.pause
+          : ENDPOINTS.play,
       token: accessToken,
       method: HTTP.PUT,
     });

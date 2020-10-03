@@ -3,6 +3,14 @@ import { Loader } from "./Loader";
 
 export default {
   title: "Loader",
+  parameters: {
+    backgrounds: {
+      values: [
+        { name: "light", value: "#fff" },
+        { name: "dark", value: "#000" },
+      ],
+    },
+  },
 };
 
 export const Default = () => (

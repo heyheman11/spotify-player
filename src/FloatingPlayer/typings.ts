@@ -6,12 +6,12 @@ export interface PlayerState {
 export interface Device {
   name: string;
   type: string;
+  id: string;
 }
 
 export interface SongState {
   position?: number;
-  isPaused?: boolean;
-  isPlaying?: boolean;
+  isPlaying: boolean;
   duration?: number;
   artistName: string;
   artistLink?: string;

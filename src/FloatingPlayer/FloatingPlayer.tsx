@@ -19,7 +19,7 @@ export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
   togglePlayback,
   isPlayingLocally,
   isPlayerReady,
-  deviceState
+  deviceState,
 }) => {
   const [isMouseOn, setIsMouseOn] = useState(false);
 
@@ -59,13 +59,13 @@ export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
         return (
           <>
             <h3>Currently playing</h3>
-            <p>{deviceState?.name}</p>
+            <p>{`${deviceState?.name} ${deviceState?.type}`}</p>
             {getArtistLink()}
             <img src={playingInformation?.albumImageLink} />
             <h4 className="primary">{playingInformation?.songName}</h4>
             <p>{playingInformation?.albumName}</p>
             <button onClick={togglePlayback}>
-              {playingInformation?.isPaused ? "play" : "pause"}
+              {playingInformation?.isPlaying ? "pause" : "play"}
             </button>
           </>
         );
@@ -81,7 +81,7 @@ export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
         <h4 className="primary">{playingInformation?.songName}</h4>
         <p>{playingInformation?.albumName}</p>
         <button onClick={togglePlayback}>
-          {playingInformation?.isPaused ? "play" : "pause"}
+          {playingInformation?.isPlaying ? "pause" : "play"}
         </button>
       </>
     );
@@ -91,7 +91,7 @@ export const FloatingPlayer: React.FC<FloatingPlayerProps> = ({
     if (!isPlayerReady) {
       return <Loader />;
     }
-    if (isPlayingLocally) {
+    if (playingInformation?.isPlaying) {
       return <p className="floating-player--icon__dancing">🎵</p>;
     }
     return <p className="floating-player--icon">🎵</p>;

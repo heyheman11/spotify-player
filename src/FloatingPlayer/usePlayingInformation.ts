@@ -31,6 +31,7 @@ export const usePlayingInformation = (
     setDevice({
       name: device.name,
       type: device.type,
+      id: device.id,
     });
 
     if (is_playing) {
