@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { RecentlyPlayed } from "./RecentlyPlayed";
-import { SPOTIFY_API_URL, HTTP } from "./utils/constants";
-import Panel from "./Components/Panel";
-import { ContainerProps, Track } from "./interfaces/global";
+import { ENDPOINTS } from "../utils/constants";
+import { request } from "../utils/common";
+import Panel from "../Components/Panel";
+import { ContainerProps, Track } from "../interfaces/global";
 
 const RecentlyPlayedContainer: React.FC<ContainerProps> = (props) => {
-  const [playingInformation, setPlayingInformation] = React.useState<Track[]>();
-  const RECENTLY_PLAYED = "/v1/me/player/recently-played?limit=50";
+  const [playingInformation, setPlayingInformation] = useState<Track[]>();
 
   const getTracks = ({ items }) => {
     const tracks = items.map(
@@ -25,20 +25,15 @@ const RecentlyPlayedContainer: React.FC<ContainerProps> = (props) => {
     setPlayingInformation(tracks);
   };
 
-  React.useEffect(() => {
-    fetch(`${SPOTIFY_API_URL}${RECENTLY_PLAYED}`, {
-      method: HTTP.GET,
-      headers: {
-        Authorization: `Bearer ${props.accessToken}`,
+  useEffect(() => {
+    request(
+      {
+        url: `${ENDPOINTS.recentlyPlayed}?limit=10`,
+        method: "get",
+        token: props.accessToken,
       },
-    }).then((response) => {
-      if (response.status === 401) {
-        // Handle a 401
-        // Expired token
-        response.json().then();
-      }
-      response.json().then(getTracks);
-    });
+      (results: any) => getTracks(results)
+    );
   }, []);
 
   return playingInformation ? (

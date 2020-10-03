@@ -1,52 +1,63 @@
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-import { HTTP, SPOTIFY_API_URL } from "../utils/constants";
+import { HTTP, ENDPOINTS } from "../utils/constants";
+import { request } from "../utils/common";
+import type { SongState, Device } from "./typings";
 
-export const usePlayingInformation = (accessToken: string) => {
-  // const [isNoContent, setIsNoContent] = useState(false);
-  const [playingInformation, setPlayingInformation] = useState({});
+/**
+ *
+ * Returns information about the users currently playing sessions
+ * @param accessToken
+ *
+ */
+export const usePlayingInformation = (
+  accessToken: string
+): [SongState | undefined, Device | undefined, boolean] => {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [songState, setSongState] = useState<SongState | undefined>();
+  const [device, setDevice] = useState<Device | undefined>();
 
-  // const getPlayingContext = () => {
-  //   fetch(`${SPOTIFY_API_URL}/v1/me/player`, {
-  //     method: HTTP.GET,
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`
-  //     }
-  //   }).then(response => {
-  //     if (response.status === 200) {
-  //       console.log();
-  //     }
-  //   });
-  // };
+  const setSongStateMapper = ({ is_playing, item, progress_ms }) => {
+    setSongState({
+      isPlaying: is_playing,
+      artistName: item.album.artists.map((artist) => artist.name),
+      albumName: item.album.name,
+      albumImageLink: item.album.images[2].url,
+      songName: item.name,
+      progress: Number(progress_ms / 1000 / 60),
+    });
+  };
+
+  const setDeviceMapper = ({ device, is_playing }) => {
+    setDevice({
+      name: device.name,
+      type: device.type,
+      id: device.id,
+    });
+
+    if (is_playing) {
+      setIsPlaying(true);
+    }
+  };
 
   useEffect(() => {
-    fetch(`${SPOTIFY_API_URL}/v1/me/player/currently-playing`, {
-      method: HTTP.GET,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }).then((response) => {
-      if (response.status === 401) {
-        response.json().then();
-      } else if (response.status === 200) {
-        response.json().then((data) => {
-          setPlayingInformation({
-            isPlaying: data.is_playing,
-            artistName: data.item.album.artists.map((artist) => artist.name),
-            albumName: data.item.album.name,
-            albumImageLink: data.item.album.images[2].url,
-            songName: data.item.name,
-            deviceName: data.device.name,
-            deviceType: data.device.type,
-            progress: Number(data.progress_ms / 1000 / 60),
-          });
-        });
-      } else if (response.status === 204) {
-        console.log("nothing is playing");
-      }
-    }),
-      [];
-  });
+    request(
+      { url: ENDPOINTS.player, method: HTTP.GET, token: accessToken },
+      setDeviceMapper
+    );
+  }, [accessToken]);
 
-  return playingInformation;
+  useEffect(() => {
+    if (isPlaying) {
+      request(
+        {
+          url: ENDPOINTS.currentlyPlaying,
+          method: HTTP.GET,
+          token: accessToken,
+        },
+        setSongStateMapper
+      );
+    }
+  }, [isPlaying, accessToken]);
+
+  return [songState, device, isPlaying];
 };

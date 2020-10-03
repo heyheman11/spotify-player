@@ -1,5 +1,5 @@
 import React from "react";
-import { Track } from "./interfaces/global";
+import { Track } from "../interfaces/global";
 import "./RecentlyPlayed.scss";
 
 interface RecentlyPlayedProps {
@@ -16,13 +16,16 @@ export const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ tracks }) => {
             <p className="primary">{item.albumName}</p>
             <p className="secondary">{item.trackName}</p>
             <p className="secondary">{item.artistName}</p>
+            <p className="italics">
+              {new Date(item.playedTime).toLocaleString()}
+            </p>
           </div>
         </div>
       ));
-    } else {
-      return null;
     }
+
+    return null;
   };
 
-  return <>{getRows()}</>;
+  return <div className="recently-played-container">{getRows()}</div>;
 };

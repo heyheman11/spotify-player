@@ -29,6 +29,31 @@
     height: 500px;
     background: white;
   }
+
+  &--icon__dancing {
+    animation: dancing 1.5s infinite;
+  }
+}
+
+@keyframes dancing {
+  0% {
+    transform: rotate(0deg);
+    transform: translateY(0px);
+  }
+  35% {
+    transform: rotate(45deg);
+  }
+  50% {
+    transform: rotate(0deg);
+    transform: translateY(5px);
+  }
+  75% {
+    transform: rotate(-45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    transform: translateY(0px);
+  }
 }
 
 .floating-player-inner {

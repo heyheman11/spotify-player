@@ -1,5 +1,5 @@
 import React from "react";
-import { HTTP } from "./utils/constants";
+import { HTTP } from "../utils/constants";
 import "./AlbumPanel.scss";
 
 type AlbumPanelOrientation = "vertical" | "horizontal";
