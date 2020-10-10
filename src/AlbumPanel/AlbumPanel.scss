@@ -13,7 +13,7 @@
 
   &.horizontal {
     height: 140px;
-    max-width: 280px;
+    width: 280px;
     display: flex;
     .inner {
       margin: 0 0 0 10px;
@@ -22,7 +22,7 @@
 
   &.vertical {
     width: 140px;
-    max-height: 280px;
+    height: 280px;
     .inner {
       margin: 10px 0 0 0;
     }
