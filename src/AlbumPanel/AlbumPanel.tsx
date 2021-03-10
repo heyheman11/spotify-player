@@ -4,7 +4,7 @@ import "./AlbumPanel.scss";
 
 type AlbumPanelOrientation = "vertical" | "horizontal";
 
-interface AlbumPanelProps {
+export interface AlbumPanelProps {
   audioType: string;
   trackId: string;
   orientation?: AlbumPanelOrientation;
